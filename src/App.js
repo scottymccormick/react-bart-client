@@ -19,11 +19,17 @@ class App extends Component {
       email: user.email
     });
   }
+  handleLogout = () => {
+    this.setState({
+      logged: false,
+      email: ''
+    });
+  }
   render() {
     return (
       <div className="App">
         <h1>BART React App</h1>
-        <Login handleLogin={this.handleLogin}/>
+        <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>
         {this.state.logged ? <p>{this.state.email} is logged in.</p> : null }
       </div>
     );
