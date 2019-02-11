@@ -3,6 +3,7 @@ import React from 'react';
 const LoginForm = (props) => {
   return (
     <div>
+      <h2>Login Form</h2>
       <form onSubmit={props.handleSubmit}>
         <label>
           Email:

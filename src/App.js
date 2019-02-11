@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Login from './components/Login';
+import Registration from './components/Registration';
 
 class App extends Component {
   constructor() {
@@ -31,6 +32,7 @@ class App extends Component {
         <h1>BART React App</h1>
         <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>
         {this.state.logged ? <p>{this.state.email} is logged in.</p> : null }
+        <Registration />
       </div>
     );
   }
