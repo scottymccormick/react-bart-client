@@ -16,16 +16,17 @@ class Login extends Component {
       [e.currentTarget.name]: e.currentTarget.value
     });
   }
-  handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      console.log('submitted');
-      const response = await axios('http://localhost:9000/');
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('submitted');
+    axios.post('http://localhost:9000/api/users/login', this.state)
+      .then((response) => {
+        console.log(response);
+        this.props.handleLogin(this.state);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   render() {
 
