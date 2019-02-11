@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from '../containers/LoginForm';
+import axios from 'axios';
 
 class Login extends Component {
   constructor() {
@@ -15,9 +16,16 @@ class Login extends Component {
       [e.currentTarget.name]: e.currentTarget.value
     });
   }
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('submitted');
+  handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      console.log('submitted');
+      const response = await axios('http://localhost:9000/');
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
   render() {
 
