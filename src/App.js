@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import axios from 'axios';
+import Stations from './components/Stations';
 
 class App extends Component {
   constructor() {
@@ -12,7 +13,8 @@ class App extends Component {
       logged: false,
       email: '',
       showLogin: false,
-      showRegistration: false
+      showRegistration: false,
+      showStations: false
     }
   }
   handleLogin = (user) => {
@@ -42,6 +44,9 @@ class App extends Component {
   toggleRegistrationModal = () => {
     this.setState({showRegistration: !this.state.showRegistration});
   }
+  toggleStations = () => {
+    this.setState({showStations: !this.state.showStations});
+  }
   render() {
     return (
       <div className="App">
@@ -64,6 +69,10 @@ class App extends Component {
             <p>{this.state.email} is logged in.</p><br/>
             <button onClick={this.handleLogoutClick}>Logout</button>
           </div> : null }
+        {this.state.showStations ? 
+          <Stations hideStations={this.toggleStations}/> : 
+          <button onClick={this.toggleStations}>Stations</button>}
+        
       </div>
     );
   }
