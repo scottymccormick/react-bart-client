@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import axios from 'axios';
+import Stations from './components/Stations';
 
 class App extends Component {
   constructor() {
@@ -64,6 +65,7 @@ class App extends Component {
             <p>{this.state.email} is logged in.</p><br/>
             <button onClick={this.handleLogoutClick}>Logout</button>
           </div> : null }
+        <Stations />
       </div>
     );
   }
