@@ -15,7 +15,6 @@ const LoginForm = (props) => {
         </label>
         <input type="submit" value="Login"/>
       </form>
-      <button onClick={props.handleLogoutClick}>Logout</button>
     </div>
   )
 }

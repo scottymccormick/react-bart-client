@@ -22,13 +22,8 @@ class Registration extends Component {
     console.log('registration submit reached');
     axios.post('http://localhost:9000/api/users/register', this.state)
       .then((response) => {
-        console.log(response);
+        console.log('register response', response);
         this.props.handleLogin(this.state);
-        this.setState({
-          email: '',
-          name: '',
-          password: ''
-        })
       })
       .catch((error) => {
         console.log(error);
