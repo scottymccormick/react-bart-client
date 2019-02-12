@@ -3,9 +3,9 @@ import React from 'react';
 const StationPage = (props) => {
   return (
     <div>
-      <h3>Current Station: {props.currentStation}</h3>
+      <h3>Current Station: {props.stationName}</h3>
       <button onClick={props.goBack}>Go Back</button>
-      {
+      { props.etd ? 
         props.etd.map((direction, i) => {
           return <div key={i}>
             {direction.destination}
@@ -17,7 +17,7 @@ const StationPage = (props) => {
                 }
               </ul>
             </div>
-        })
+        }) : null
       }
     </div>
   )

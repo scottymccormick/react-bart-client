@@ -3,22 +3,22 @@ import StationPage from '../containers/StationPage';
 import axios from 'axios';
 
 class Station extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      abbr: props.currentStation,
+      name: '',
       etd: []
     }
   }
   getEtds = () => {
-    axios.get(`http://localhost:9000/api/stations/etd/${this.state.abbr}`)
+    axios.get(`http://localhost:9000/api/stations/etd/${this.props.currentStation}`)
       .then((response) => {
         if (response.status === 200) {
           this.setState({
-            etd: response.data
+            name: response.data.name,
+            etd: response.data.etd
           });
-          console.log(response.data);
         }
       })
       .catch((err) => {
@@ -28,14 +28,14 @@ class Station extends Component {
   componentDidMount() {
     this.getEtds();
   }
-  shouldComponentUpdate(prevProps) {
-    return this.props.abbr !== prevProps.currentStation
+  componentDidUpdate(prevProps) {
+    if (this.props.currentStation !== prevProps.currentStation) {
+      this.getEtds();
+    }
   }
   render() {
     return (
-      <div>
-        {this.state.etd.length > 0 ? <StationPage currentStation={this.state.abbr} goBack={this.props.goBack} etd={this.state.etd}/> : null }
-      </div>
+      <StationPage currentStation={this.props.currentStation} goBack={this.props.goBack} etd={this.state.etd} stationName={this.state.name}/>
     )
   }
 }
