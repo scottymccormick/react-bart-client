@@ -29,6 +29,11 @@ class Stations extends Component {
       currentStation: abbr
     });
   }
+  deselectStation = () => {
+    this.setState({
+      currentStation: ''
+    });
+  }
   componentDidMount() {
     this.getStations();
   }
@@ -38,7 +43,10 @@ class Stations extends Component {
         <h2>Stations</h2>
         <button onClick={this.props.hideStations}>Hide Stations</button>
         {this.state.currentStation ? 
-          <h3>Current Station: {this.state.currentStation}</h3> : null	}
+          <div>
+            <h3>Current Station: {this.state.currentStation}</h3>
+            <button onClick={this.deselectStation}>Go Back</button>
+          </div> : null	}
         <StationsList stations={this.state.stations} selectStation={this.selectStation} />
       </div>
     )
