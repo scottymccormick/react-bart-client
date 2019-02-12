@@ -30,6 +30,7 @@ class Stations extends Component {
     return (
       <div>
         <h2>Stations</h2>
+        <button onClick={this.props.hideStations}>Hide Stations</button>
         <StationsList stations={this.state.stations} />
       </div>
     )
