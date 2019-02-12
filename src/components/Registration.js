@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RegistrationForm from '../containers/RegistrationForm';
+import axios from 'axios';
 
 class Registration extends Component {
   constructor() {
@@ -19,6 +20,19 @@ class Registration extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('registration submit reached');
+    axios.post('http://localhost:9000/api/users/register', this.state)
+      .then((response) => {
+        console.log(response);
+        this.props.handleLogin(this.state);
+        this.setState({
+          email: '',
+          name: '',
+          password: ''
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   render() {
     console.log(this.state)

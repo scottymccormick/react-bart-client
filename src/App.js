@@ -32,7 +32,7 @@ class App extends Component {
         <h1>BART React App</h1>
         <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>
         {this.state.logged ? <p>{this.state.email} is logged in.</p> : null }
-        <Registration />
+        <Registration handleLogin={this.handleLogin} />
       </div>
     );
   }
