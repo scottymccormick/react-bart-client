@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StationsList from '../containers/StationsList';
 import axios from 'axios';
+import Station from './Station';
 
 class Stations extends Component {
   constructor() {
@@ -43,10 +44,7 @@ class Stations extends Component {
         <h2>Stations</h2>
         <button onClick={this.props.hideStations}>Hide Stations</button>
         {this.state.currentStation ? 
-          <div>
-            <h3>Current Station: {this.state.currentStation}</h3>
-            <button onClick={this.deselectStation}>Go Back</button>
-          </div> : null	}
+          <Station currentStation={this.state.currentStation} goBack={this.deselectStation} /> : null	}
         <StationsList stations={this.state.stations} selectStation={this.selectStation} />
       </div>
     )
