@@ -7,11 +7,11 @@ const LoginForm = (props) => {
       <form onSubmit={props.handleSubmit}>
         <label>
           Email:
-          <input type="email" name="email" onChange={props.handleInput} value={props.email}/>
+          <input type="email" name="email" onChange={props.handleInput} value={props.email}/><br/>
         </label>
         <label>
           Password:
-          <input type="password" name="password" onChange={props.handleInput} value={props.password}/>
+          <input type="password" name="password" onChange={props.handleInput} value={props.password}/><br/>
         </label>
         <input type="submit" value="Login"/>
       </form>
