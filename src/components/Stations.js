@@ -29,6 +29,7 @@ class Stations extends Component {
     this.setState({
       currentStation: abbr
     });
+    console.log('select station clicked', abbr)
   }
   deselectStation = () => {
     this.setState({
