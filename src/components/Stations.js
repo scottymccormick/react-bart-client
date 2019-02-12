@@ -7,7 +7,8 @@ class Stations extends Component {
     super();
 
     this.state = {
-      stations: []
+      stations: [],
+      currentStation: ''
     }
   }
   getStations() {
@@ -23,6 +24,11 @@ class Stations extends Component {
         console.log(err);
       })
   }
+  selectStation = (abbr) => {
+    this.setState({
+      currentStation: abbr
+    });
+  }
   componentDidMount() {
     this.getStations();
   }
@@ -31,7 +37,9 @@ class Stations extends Component {
       <div>
         <h2>Stations</h2>
         <button onClick={this.props.hideStations}>Hide Stations</button>
-        <StationsList stations={this.state.stations} />
+        {this.state.currentStation ? 
+          <h3>Current Station: {this.state.currentStation}</h3> : null	}
+        <StationsList stations={this.state.stations} selectStation={this.selectStation} />
       </div>
     )
   }

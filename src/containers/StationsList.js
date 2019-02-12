@@ -2,7 +2,7 @@ import React from 'react';
 
 const StationsList = (props) => {
   const stationListItems = props.stations.map((station, i) => {
-    return <li key={i}><a href="#">{station.name}</a></li>
+    return <li key={i}><button onClick={props.selectStation.bind(null, station.abbr)}>{station.name}</button></li>
   })
   return (
     <div>
