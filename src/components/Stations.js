@@ -50,7 +50,7 @@ class Stations extends Component {
         <button onClick={this.props.hideStations}>Hide Stations</button>
         <StationPicker stations={this.state.stations} selectStation={this.selectStation} origin={this.state.currentStation} chooseStation={this.chooseStation} />
         {this.state.currentStation ? 
-          <Station currentStation={this.state.currentStation} goBack={this.deselectStation} /> : null	}
+          <Station currentStation={this.state.currentStation} goBack={this.deselectStation} logged={this.props.logged} email={this.props.email} addFavorite={this.props.addFavorite}/> : null	}
       </div>
     )
   }

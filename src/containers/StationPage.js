@@ -5,6 +5,14 @@ const StationPage = (props) => {
     <div>
       <h3>Current Station: {props.stationName}</h3>
       <button style={{display: "block", margin: 'auto'}} onClick={props.goBack}>Go Back</button>
+      {
+        props.logged ? 
+        <div>
+          <br/>
+          <button onClick={props.addFavorite}>Add to Favorites</button>
+          <br/>
+        </div> : null
+      }
       { props.etd ? 
         props.etd.map((direction, i) => {
           return <div key={i} style={{width: '50%', display: "inline-block"}}>

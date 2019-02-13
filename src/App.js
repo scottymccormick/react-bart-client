@@ -61,6 +61,9 @@ class App extends Component {
   toggleFavorites = () => {
     console.log('reached toggle favorites')
   }
+  addFavorite = () => {
+    console.log('add favorite reached')
+  }
   render() {
     return (
       <div className="App">
@@ -84,7 +87,7 @@ class App extends Component {
             <button onClick={this.handleLogoutClick}>Logout</button>
           </div> : null }
         {this.state.showStations ? 
-          <Stations hideStations={this.toggleStations}/> : 
+          <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite}/> : 
           <div>
             <button onClick={this.toggleStations}>Stations</button>
           </div> }
