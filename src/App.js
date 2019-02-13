@@ -38,7 +38,8 @@ class App extends Component {
         console.log('logout response',response);
         this.setState({
           logged: false,
-          email: ''
+          email: '',
+          showFavorites: false
         });
       })
   }
