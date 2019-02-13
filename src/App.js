@@ -86,7 +86,7 @@ class App extends Component {
             <button onClick={this.toggleStations}>Stations</button>
           </div> }
         {this.state.showRoutePlanner ?
-          <RoutePlanner /> :
+          <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} /> :
           <div>
             <button onClick={this.toggleRoutePlanner}>Route Planner</button>
           </div> }
