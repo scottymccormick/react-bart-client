@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Registration from './components/Registration';
 import axios from 'axios';
 import Stations from './components/Stations';
+import RoutePlanner from './components/RoutePlanner';
 
 class App extends Component {
   constructor() {
@@ -14,7 +15,8 @@ class App extends Component {
       email: '',
       showLogin: false,
       showRegistration: false,
-      showStations: false
+      showStations: false,
+      showRoutePlanner: false
     }
   }
   handleLogin = (user) => {
@@ -45,7 +47,16 @@ class App extends Component {
     this.setState({showRegistration: !this.state.showRegistration});
   }
   toggleStations = () => {
-    this.setState({showStations: !this.state.showStations});
+    this.setState({
+      showStations: !this.state.showStations,
+      showRoutePlanner: false
+    });
+  }
+  toggleRoutePlanner = () => {
+    this.setState({
+      showRoutePlanner: !this.state.showRoutePlanner,
+      showStations: false
+    });
   }
   render() {
     return (
@@ -71,8 +82,14 @@ class App extends Component {
           </div> : null }
         {this.state.showStations ? 
           <Stations hideStations={this.toggleStations}/> : 
-          <button onClick={this.toggleStations}>Stations</button>}
-        
+          <div>
+            <button onClick={this.toggleStations}>Stations</button>
+          </div> }
+        {this.state.showRoutePlanner ?
+          <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} /> :
+          <div>
+            <button onClick={this.toggleRoutePlanner}>Route Planner</button>
+          </div> }
       </div>
     );
   }
