@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RouteForm from '../containers/RouteForm';
 import axios from 'axios';
+import RouteResults from '../containers/RouteResults';
 
 class RoutePlanner extends Component {
   constructor() {
@@ -58,6 +59,8 @@ class RoutePlanner extends Component {
         <h2>Route Planner</h2>
         <RouteForm handleSubmit={this.handleSubmit} handleInput={this.handleInput} formInfo={this.state}/>
         <button onClick={this.props.hideRoutePlanner}>Close</button>
+        {this.state.routes.length > 0 ? 
+          <RouteResults /> : null}
       </div>
     )
   }
