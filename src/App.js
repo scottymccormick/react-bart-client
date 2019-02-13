@@ -58,6 +58,9 @@ class App extends Component {
       showStations: false
     });
   }
+  toggleFavorites = () => {
+    console.log('reached toggle favorites')
+  }
   render() {
     return (
       <div className="App">
@@ -90,6 +93,10 @@ class App extends Component {
           <div>
             <button onClick={this.toggleRoutePlanner}>Route Planner</button>
           </div> }
+        {this.state.logged ? 
+          <div>
+            <button onClick={this.toggleFavorites}>Favorites</button>
+          </div> : null}
       </div>
     );
   }
