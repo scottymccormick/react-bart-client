@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StationsList from '../containers/StationsList';
+import StationPicker from '../containers/StationPicker';
 import axios from 'axios';
 import Station from './Station';
 
@@ -35,6 +35,11 @@ class Stations extends Component {
       currentStation: ''
     });
   }
+  chooseStation = (e) => {
+    this.setState({
+      currentStation: e.currentTarget.value
+    });
+  }
   componentDidMount() {
     this.getStations();
   }
@@ -43,9 +48,9 @@ class Stations extends Component {
       <div>
         <h2>Stations</h2>
         <button onClick={this.props.hideStations}>Hide Stations</button>
+        <StationPicker stations={this.state.stations} selectStation={this.selectStation} origin={this.state.currentStation} chooseStation={this.chooseStation} />
         {this.state.currentStation ? 
           <Station currentStation={this.state.currentStation} goBack={this.deselectStation} /> : null	}
-        <StationsList stations={this.state.stations} selectStation={this.selectStation} />
       </div>
     )
   }
