@@ -5,6 +5,7 @@ import Registration from './components/Registration';
 import axios from 'axios';
 import Stations from './components/Stations';
 import RoutePlanner from './components/RoutePlanner';
+import Favorites from './components/Favorites';
 
 class App extends Component {
   constructor() {
@@ -16,7 +17,8 @@ class App extends Component {
       showLogin: false,
       showRegistration: false,
       showStations: false,
-      showRoutePlanner: false
+      showRoutePlanner: false,
+      showFavorites: false
     }
   }
   handleLogin = (user) => {
@@ -60,6 +62,9 @@ class App extends Component {
   }
   toggleFavorites = () => {
     console.log('reached toggle favorites')
+    this.setState({
+      showFavorites: !this.state.showFavorites
+    });
   }
   addFavorite = () => {
     console.log('add favorite reached')
@@ -100,6 +105,8 @@ class App extends Component {
           <div>
             <button onClick={this.toggleFavorites}>Favorites</button>
           </div> : null}
+        {this.state.showFavorites ?
+          <Favorites /> : null}
       </div>
     );
   }
