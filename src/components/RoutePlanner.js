@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RouteForm from '../containers/RouteForm';
+import axios from 'axios';
 
 class RoutePlanner extends Component {
   constructor() {
@@ -7,7 +8,8 @@ class RoutePlanner extends Component {
 
     this.state = {
       origin: '',
-      destination: ''
+      destination: '',
+      stations: []
     }
   }
   handleInput = (e) => {
@@ -19,6 +21,19 @@ class RoutePlanner extends Component {
     e.preventDefault();
 
     console.log('reached route planner form submit')
+  }
+  componentDidMount() {
+    axios.get('http://localhost:9000/api/stations')
+      .then((response) => {
+        if (response.status === 200) {
+          this.setState({
+            stations: response.data
+          })
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
   render() {
     console.log(this.state)
