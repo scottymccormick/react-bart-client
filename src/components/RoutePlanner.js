@@ -9,7 +9,8 @@ class RoutePlanner extends Component {
     this.state = {
       origin: '',
       destination: '',
-      stations: []
+      stations: [],
+      routes: []
     }
   }
   handleInput = (e) => {
@@ -20,7 +21,22 @@ class RoutePlanner extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log('reached route planner form submit')
+    console.log('reached route planner form submit');
+
+    const urlString = `http://localhost:9000/api/routes?orig=${this.state.origin}&dest=${this.state.destination}`;
+
+    axios.get(urlString)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          this.setState({
+            routes: response.data.request.trip
+          })
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
   componentDidMount() {
     axios.get('http://localhost:9000/api/stations')
