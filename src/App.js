@@ -67,8 +67,21 @@ class App extends Component {
       showFavorites: !this.state.showFavorites
     });
   }
-  addFavorite = () => {
-    console.log('add favorite reached')
+  addFavorite = (origin) => {
+    console.log('add favorite reached');
+    console.log('origin', origin);
+    const newFavorite = {
+      email: this.state.email,
+      origin
+    }
+
+    axios.post('http://localhost:9000/api/users/favorites', newFavorite)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
   render() {
     return (
