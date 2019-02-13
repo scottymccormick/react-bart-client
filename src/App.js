@@ -106,7 +106,7 @@ class App extends Component {
             <button onClick={this.toggleFavorites}>Favorites</button>
           </div> : null}
         {this.state.showFavorites ?
-          <Favorites /> : null}
+          <Favorites email={this.state.email}/> : null}
       </div>
     );
   }
