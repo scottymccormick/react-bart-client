@@ -11,7 +11,8 @@ class RoutePlanner extends Component {
       origin: '',
       destination: '',
       stations: [],
-      routes: []
+      routes: [],
+      searched: false
     }
   }
   handleInput = (e) => {
@@ -25,6 +26,10 @@ class RoutePlanner extends Component {
     console.log('reached route planner form submit');
 
     const urlString = `http://localhost:9000/api/routes?orig=${this.state.origin}&dest=${this.state.destination}`;
+
+    this.setState({
+      searched: true
+    });
 
     axios.get(urlString)
       .then((response) => {
@@ -40,6 +45,9 @@ class RoutePlanner extends Component {
       })
   }
   componentDidMount() {
+    this.setState({
+      searched: false
+    })
     axios.get('http://localhost:9000/api/stations')
       .then((response) => {
         if (response.status === 200) {
@@ -59,8 +67,10 @@ class RoutePlanner extends Component {
         <h2>Route Planner</h2>
         <RouteForm handleSubmit={this.handleSubmit} handleInput={this.handleInput} formInfo={this.state}/>
         <button onClick={this.props.hideRoutePlanner}>Close</button>
-        {this.state.routes.length > 0 ? 
-          <RouteResults /> : null}
+        {this.state.searched ?
+          (this.state.routes.length > 0 ? 
+          <RouteResults results={this.state.routes} /> : <p>Loading...</p>)
+          : null }
       </div>
     )
   }
