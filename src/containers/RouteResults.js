@@ -16,7 +16,10 @@ const RouteResults = (props) => {
         <hr/>
       </div>
     )
-  })
+  });
+  const favIndex = props.favorites.findIndex((fav) => {
+    return fav.origin === props.origin && fav.destination === props.destination
+  }) ;
   return (
     <div>
       <h4>Route Results</h4>
@@ -24,7 +27,10 @@ const RouteResults = (props) => {
         props.logged ? 
         <div>
           <br/>
-          <button onClick={props.addFavorite.bind(null, props.origin, props.destination)}>Add to Favorites</button>
+          {favIndex > -1 ? 
+            <button onClick={props.deleteFavorite.bind(null, props.favorites[favIndex]._id)}>Remove from Favorites</button> : 
+            <button onClick={props.addFavorite.bind(null, props.origin, props.destination)}>Add to Favorites</button>}
+          
           <br/>
         </div> : null
       }

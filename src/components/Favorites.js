@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FavoritesContainer from '../containers/FavoritesContainer';
-import axios from 'axios';
 
 class Favorites extends Component {
   constructor() {

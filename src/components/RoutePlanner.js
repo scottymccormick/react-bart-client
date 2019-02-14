@@ -69,7 +69,7 @@ class RoutePlanner extends Component {
         <button onClick={this.props.hideRoutePlanner}>Close</button>
         {this.state.searched ?
           (this.state.routes.length > 0 ? 
-          <RouteResults results={this.state.routes} origin={this.state.origin} destination={this.state.destination} addFavorite={this.props.addFavorite} logged={this.props.logged} /> : <p>Loading...</p>)
+          <RouteResults results={this.state.routes} origin={this.state.origin} destination={this.state.destination} addFavorite={this.props.addFavorite} logged={this.props.logged} favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} /> : <p>Loading...</p>)
           : null }
       </div>
     )
