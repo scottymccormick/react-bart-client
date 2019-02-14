@@ -5,6 +5,7 @@ import Registration from './components/Registration';
 import axios from 'axios';
 import Stations from './components/Stations';
 import RoutePlanner from './components/RoutePlanner';
+import Favorites from './components/Favorites';
 
 class App extends Component {
   constructor() {
@@ -13,10 +14,12 @@ class App extends Component {
     this.state = {
       logged: false,
       email: '',
+      favorites: [],
       showLogin: false,
       showRegistration: false,
       showStations: false,
-      showRoutePlanner: false
+      showRoutePlanner: false,
+      showFavorites: false
     }
   }
   handleLogin = (user) => {
@@ -36,7 +39,8 @@ class App extends Component {
         console.log('logout response',response);
         this.setState({
           logged: false,
-          email: ''
+          email: '',
+          showFavorites: false
         });
       })
   }
@@ -57,6 +61,64 @@ class App extends Component {
       showRoutePlanner: !this.state.showRoutePlanner,
       showStations: false
     });
+  }
+  toggleFavorites = () => {
+    console.log('reached toggle favorites')
+    this.setState({
+      showFavorites: !this.state.showFavorites
+    });
+  }
+  addFavorite = (origin, destination, e) => {
+    const newFavorite = {
+      email: this.state.email,
+      origin
+    }
+    if (destination && typeof destination === 'string') {
+      newFavorite.destination = destination;
+    }
+    axios.post('http://localhost:9000/api/users/favorites', newFavorite)
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          favorites: [...this.state.favorites, response.data]
+        });
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  getFavorites = () => {
+    console.log('get favorites reached');
+    axios.get(`http://localhost:9000/api/users/favorites?email=${this.state.email}`)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          this.setState({
+            favorites: response.data
+          })
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+  deleteFavorite = (favoriteId, e) => {
+    console.log('reached delete favorite', favoriteId)
+    axios.delete(`http://localhost:9000/api/users/favorites/${favoriteId}`)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          const updatedFavorites = this.state.favorites.filter((favorite) => {
+            return favorite._id !== response.data._id;
+          });
+          this.setState({
+            favorites: updatedFavorites
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
   render() {
     return (
@@ -81,15 +143,21 @@ class App extends Component {
             <button onClick={this.handleLogoutClick}>Logout</button>
           </div> : null }
         {this.state.showStations ? 
-          <Stations hideStations={this.toggleStations}/> : 
+          <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : 
           <div>
             <button onClick={this.toggleStations}>Stations</button>
           </div> }
         {this.state.showRoutePlanner ?
-          <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} /> :
+          <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} /> :
           <div>
             <button onClick={this.toggleRoutePlanner}>Route Planner</button>
           </div> }
+        {this.state.logged ? 
+          <div>
+            <button onClick={this.toggleFavorites}>Favorites</button>
+          </div> : null}
+        {this.state.showFavorites ?
+          <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite}/> : null}
       </div>
     );
   }
