@@ -17,13 +17,22 @@ const StationPage = (props) => {
       }
       { props.etd ? 
         props.etd.map((direction, i) => {
-          return <div key={i} style={{width: '50%', display: "inline-block"}} className="bg-light p-3">
-            <h5 className="text-dark">{direction.destination}</h5>
-              <ListGroup className="m-3">
+          return <div key={i}  className="text-dark p-2">
+            <h5 className="text-light">{direction.destination}</h5>
+              <ListGroup className="bg-light p-3 m-3">
               {
                 direction.estimate.map((est, j) => {
-                  console.log(est.hexcolor)
-                  return <ListGroupItem className="my-1" style={{boxShadow: "inset 0px 0px 0px 3px " + est.hexcolor + "66"}} key={j}>{est.minutes}{est.minutes !== 'Leaving' ? ' minutes' : ''}</ListGroupItem>
+                  console.log(est)
+                  return <ListGroupItem className="my-1 text-dark d-flex justify-content-between align-items-center" style={{boxShadow: "inset 0px 0px 0px 3px " + est.hexcolor + "66"}} key={j}>
+                    {Number(est.delay) > 0 ? 
+                    <span className="badge badge-warning badge-pill mx-1">{Math.ceil(Number(est.delay) / 60)} min delay</span> :
+                    <span className="badge badge-success badge-pill mx-1">On Time</span>
+                    }
+                    
+                    <strong>{est.minutes}{est.minutes !== 'Leaving' ? ' min' : ''}</strong>
+                    <span className="badge badge-secondary badge-pill mx-1">{est.length} cars</span>
+                    
+                  </ListGroupItem>
                 })
               }
               </ListGroup>
