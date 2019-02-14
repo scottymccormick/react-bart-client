@@ -80,7 +80,7 @@ class App extends Component {
       .then((response) => {
         console.log(response);
         this.setState({
-          favorites: [...this.state.favorites, newFavorite]
+          favorites: [...this.state.favorites, response.data]
         });
       })
       .catch((error) => {
@@ -143,7 +143,7 @@ class App extends Component {
             <button onClick={this.handleLogoutClick}>Logout</button>
           </div> : null }
         {this.state.showStations ? 
-          <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite}/> : 
+          <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : 
           <div>
             <button onClick={this.toggleStations}>Stations</button>
           </div> }

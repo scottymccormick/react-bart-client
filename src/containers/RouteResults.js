@@ -19,7 +19,7 @@ const RouteResults = (props) => {
   });
   const favIndex = props.favorites.findIndex((fav) => {
     return fav.origin === props.origin && fav.destination === props.destination
-  }) ;
+  });
   return (
     <div>
       <h4>Route Results</h4>
