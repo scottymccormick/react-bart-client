@@ -209,20 +209,10 @@ class App extends Component {
             <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/>
           </Collapse>
           
-          {/* {this.state.showStations ? 
-            <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : 
-            <div>
-              <Button size="lg" block color="primary" onClick={this.toggleStations} className="mb-2 w-75 mx-auto" >Stations</Button>
-            </div> } */}
           <Button size="lg" block color="success" onClick={this.toggleRoutePlanner} className="mb-2 w-75 mx-auto">Route Planner</Button>
           <Collapse isOpen={this.state.showRoutePlanner}>
             <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} />
-          </Collapse>          
-          {/* {this.state.showRoutePlanner ?
-            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} /> :
-            <div>
-              <Button size="lg" block color="success" onClick={this.toggleRoutePlanner} className="mb-2 w-75 mx-auto">Route Planner</Button>
-            </div> } */}
+          </Collapse>
           
           {this.state.logged ? 
             <div>
@@ -231,12 +221,6 @@ class App extends Component {
                 <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart}/>
               </Collapse>
             </div> : null}
-          {/* {this.state.logged ? 
-            <div>
-              <Button size="lg" block color="danger" onClick={this.toggleFavorites} className="mb-2 w-75 mx-auto">Favorites</Button>
-            </div> : null}
-          {this.state.showFavorites ?
-            <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart}/> : null} */}
           </section>
           {this.state.showLogin ?
             <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal}      showLogin={this.state.showLogin}/> : null}

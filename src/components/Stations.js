@@ -45,9 +45,9 @@ class Stations extends Component {
   }
   render() {
     return (
-      <div>
-        <h2>Stations</h2>
-        <button onClick={this.props.hideStations}>Hide Stations</button>
+      <div className="my-4">
+        {/* <button onClick={this.props.hideStations}>Hide Stations</button> */}
+        
         <StationPicker stations={this.state.stations} selectStation={this.selectStation} origin={this.state.currentStation} chooseStation={this.chooseStation} />
         {this.state.currentStation ? 
           <Station currentStation={this.state.currentStation} goBack={this.deselectStation} logged={this.props.logged} email={this.props.email} addFavorite={this.props.addFavorite} deleteFavorite={this.props.deleteFavorite} favorites={this.props.favorites}/> : null	}
