@@ -4,6 +4,7 @@ const FavoritesContainer = (props) => {
   return (
     <div>
       <h3>Favorites Container</h3>
+      <p>Quick Start: {props.quickStart ? props.quickStart.origin : 'Not set'}</p>
       {props.favorites.map((favorite, i) => {
         return (
           <div key={i}>

@@ -22,7 +22,7 @@ class Login extends Component {
     axios.post('http://localhost:9000/api/users/login', this.state)
       .then((response) => {
         console.log('login response',response);
-        this.props.handleLogin(this.state);
+        this.props.handleLogin(this.state, response.data.quickStart);
       })
       .catch((error) => {
         console.log(error);
