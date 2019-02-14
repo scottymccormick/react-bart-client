@@ -207,17 +207,17 @@ class App extends Component {
           
           <section className="my-5 p-3">
           <Row>
-            <Col sm="8" md="6" className="mx-auto">
+            <Col sm={this.state.showStations ? "12" : "8"} md={this.state.showStations ? "12" : "6"} className="mx-auto" style={{transition: '.5s ease-in-out'}}>
               <Button size="lg" block color="primary" onClick={this.toggleStations} className="mb-2" >Stations</Button>
             </Col>
           </Row>
           
-          <Collapse isOpen={this.state.showStations}>
+          <Collapse isOpen={this.state.showStations} style={{transition: '.5s ease-in-out'}}>
             <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/>
           </Collapse>
           
           <Row>
-            <Col sm="8" md="6" className="mx-auto">
+            <Col sm={this.state.showRoutePlanner ? "12" : "8"} md={this.state.showRoutePlanner ? "12" : "6"} className="mx-auto" style={{transition: '.5s ease-in-out'}}>
               <Button size="lg" block color="success" onClick={this.toggleRoutePlanner} className="mb-2">Route Planner</Button>
             </Col>
           </Row>
