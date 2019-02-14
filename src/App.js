@@ -24,17 +24,18 @@ class App extends Component {
       showFavorites: false
     }
   }
-  handleLogin = (user, quickStartId) => {
+  handleLogin = (user) => {
     console.log('handle login reached');
     console.log('user', user);
     this.setState({
       logged: true,
       email: user.email,
-      userId: user._id,
+      userId: user.userId,
       showLogin: false,
       showRegistration: false
     });
-    axios.get(`http://localhost:9000/api/users/favorites/${quickStartId}`)
+    if (user.quickStart) {
+      axios.get(`http://localhost:9000/api/users/favorites/${user.quickStart}`)
       .then((response) => {
         console.log(response);
         this.setState({quickStart: response.data})
@@ -42,6 +43,8 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       })
+    }
+    
   }
   handleLogoutClick = (e) => {
     console.log('reached logout');
@@ -133,6 +136,22 @@ class App extends Component {
         console.log(err);
       })
   }
+  setQuickStart() {
+    console.log('reached set quick start');
+  }
+  removeQuickStart = (currentQuickStart) => {
+    console.log('remove from quick start', currentQuickStart);
+    const userDbEntry = {
+      quickStart: {}
+    }
+    axios.put(`http://localhost:9000/api/users/${this.state.userId}`, userDbEntry)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
   render() {
     return (
       <div className="App">
@@ -170,7 +189,7 @@ class App extends Component {
             <button onClick={this.toggleFavorites}>Favorites</button>
           </div> : null}
         {this.state.showFavorites ?
-          <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart}/> : null}
+          <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart}/> : null}
       </div>
     );
   }
