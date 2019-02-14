@@ -16,6 +16,7 @@ class Station extends Component {
     axios.get(`http://localhost:9000/api/stations/etd/${this.props.currentStation}`)
       .then((response) => {
         if (response.status === 200) {
+          console.log(response.data)
           this.setState({
             name: response.data.name,
             etd: response.data.etd

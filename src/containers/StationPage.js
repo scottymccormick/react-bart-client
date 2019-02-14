@@ -1,29 +1,32 @@
 import React from 'react';
+import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 const StationPage = (props) => {
   return (
-    <div>
-      <h3>Current Station: {props.stationName}</h3>
-      <button style={{display: "block", margin: 'auto'}} onClick={props.goBack}>Go Back</button>
+    <div className="mt-2">
+      {/* <button style={{display: "block", margin: 'auto'}} onClick={props.goBack}>Go Back</button> */}
       {
         props.logged ? 
         <div>
-          <br/>
+          
           {props.favIndex > -1 ? 
-            <button onClick={props.deleteFavorite.bind(null, props.favorites[props.favIndex]._id)}>Remove from Favorites</button> : 
-            <button onClick={props.addFavorite.bind(null, props.currentStation)}>Add to Favorites</button>}
-          <br/>
+            <Button onClick={props.deleteFavorite.bind(null, props.favorites[props.favIndex]._id)}>Remove from Favorites</Button> : 
+            <Button onClick={props.addFavorite.bind(null, props.currentStation)}>Add to Favorites</Button>}
+          
         </div> : null
       }
       { props.etd ? 
         props.etd.map((direction, i) => {
           return <div key={i} style={{width: '50%', display: "inline-block"}}>
-            <h4>{direction.destination}</h4>
+            <h5>{direction.destination}</h5>
+              <ListGroup className="m-3">
               {
                 direction.estimate.map((est, j) => {
-                  return <p key={j}>{est.minutes}{est.minutes !== 'Leaving' ? ' minutes' : ''}</p>
+                  console.log(est.hexcolor)
+                  return <ListGroupItem className="my-1" style={{boxShadow: "inset 0px 0px 0px 3px " + est.hexcolor + "66"}} key={j}>{est.minutes}{est.minutes !== 'Leaving' ? ' minutes' : ''}</ListGroupItem>
                 })
               }
+              </ListGroup>
             </div>
         }) : null
       }
