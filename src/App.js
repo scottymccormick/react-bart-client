@@ -6,7 +6,14 @@ import axios from 'axios';
 import Stations from './components/Stations';
 import RoutePlanner from './components/RoutePlanner';
 import Favorites from './components/Favorites';
-import { Button } from 'reactstrap';
+import {  
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink } from 'reactstrap';
 
 class App extends Component {
   constructor() {
@@ -170,7 +177,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>BART React App</h1>
+      <Navbar color="dark" dark expand="md">
+          <NavbarBrand href="/">BART Track</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink onClick={this.toggleLoginModal}>Login</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={this.toggleRegistrationModal}>Register</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
         {!this.state.showLogin && !this.state.logged ? 
           <div>
             <button onClick={this.toggleLoginModal}>Login</button>
