@@ -30,9 +30,6 @@ const LoginForm = (props) => {
         </Form>
         </ModalBody>
       </Modal>
-      
-      <h2>Login Form</h2>
-      
     </div>
   )
 }
