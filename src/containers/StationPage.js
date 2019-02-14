@@ -17,8 +17,8 @@ const StationPage = (props) => {
       }
       { props.etd ? 
         props.etd.map((direction, i) => {
-          return <div key={i} style={{width: '50%', display: "inline-block"}}>
-            <h5>{direction.destination}</h5>
+          return <div key={i} style={{width: '50%', display: "inline-block"}} className="bg-light p-3">
+            <h5 className="text-dark">{direction.destination}</h5>
               <ListGroup className="m-3">
               {
                 direction.estimate.map((est, j) => {

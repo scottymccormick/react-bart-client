@@ -183,7 +183,7 @@ class App extends Component {
   render() {
     return (
       <div className="App h-100">
-      <Navbar color="dark" dark expand="md">
+        <Navbar color="light" primary expand="md">
           <NavbarBrand href="/">BART Track</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
