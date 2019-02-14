@@ -23,6 +23,7 @@ class App extends Component {
       logged: false,
       email: '',
       userId: '',
+      user: {},
       quickStart: null,
       favorites: [],
       showLogin: false,
@@ -39,6 +40,7 @@ class App extends Component {
       logged: true,
       email: user.email,
       userId: user.userId,
+      user: user,
       showLogin: false,
       showRegistration: false
     });
@@ -63,6 +65,7 @@ class App extends Component {
           logged: false,
           email: '',
           userId: '',
+          user: {},
           quickStart: null,
           showFavorites: false
         });
@@ -182,36 +185,25 @@ class App extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
+              <NavItem hidden={this.state.logged}>
                 <NavLink onClick={this.toggleLoginModal}>Login</NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem hidden={this.state.logged}>
                 <NavLink onClick={this.toggleRegistrationModal}>Register</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink onClick={this.handleLogoutClick}>Logout</NavLink>
+              <NavItem hidden={!this.state.logged}>
+                <NavLink disabled className="text-white">Hello, {this.state.user.name}</NavLink>
               </NavItem>
+              <NavItem hidden={!this.state.logged}>
+                <NavLink onClick={this.handleLogoutClick} color="light">Logout</NavLink>
+              </NavItem>          
             </Nav>
           </Collapse>
         </Navbar>
-        {!this.state.showLogin && !this.state.logged ? 
-          <div>
-            <button onClick={this.toggleLoginModal}>Login</button>
-          </div> : null}
-        
-        {!this.state.showRegistration && !this.state.logged ? 
-          <div>
-            <button onClick={this.toggleRegistrationModal}>Register</button>
-          </div> : null}
         {this.state.showLogin ?
           <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal}      showLogin={this.state.showLogin}/> : null}
         {this.state.showRegistration ? 
           <Registration handleLogin={this.handleLogin} /> : null }
-        {this.state.logged ? 
-          <div>
-            <p>{this.state.email} is logged in.</p><br/>
-            <button onClick={this.handleLogoutClick}>Logout</button>
-          </div> : null }
         {this.state.showStations ? 
           <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : 
           <div>
