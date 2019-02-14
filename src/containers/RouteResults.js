@@ -20,6 +20,14 @@ const RouteResults = (props) => {
   return (
     <div>
       <h4>Route Results</h4>
+      {
+        props.logged ? 
+        <div>
+          <br/>
+          <button onClick={props.addFavorite.bind(null, props.origin, props.destination)}>Add to Favorites</button>
+          <br/>
+        </div> : null
+      }
       {routeOptions}
     </div>
   )
