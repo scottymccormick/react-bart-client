@@ -4,7 +4,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Form,
   FormGroup,
   Label,
@@ -26,8 +25,9 @@ const LoginForm = (props) => {
             <Input type="password" name="password" id="passwordInput" onChange={props.handleInput} value={props.password}/>
           </FormGroup>
           <Button color="success" className="ml-2 float-right">Submit</Button>
-          <Button color="secondary" className="mx-2 float-right">Cancel</Button>
+          
         </Form>
+        <Button color="secondary" className="mx-2 float-right" onClick={props.toggleLoginModal}>Cancel</Button>
         </ModalBody>
       </Modal>
     </div>

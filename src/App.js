@@ -184,18 +184,18 @@ class App extends Component {
     return (
       <div className="App h-100">
         <Navbar color="light" primary expand="md">
-          <NavbarBrand href="/">BART Track</NavbarBrand>
+          <NavbarBrand href="/"><strong>BART Track</strong></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem hidden={this.state.logged}>
-                <NavLink onClick={this.toggleLoginModal}>Login</NavLink>
+                <NavLink onClick={this.toggleLoginModal} href="#">Login</NavLink>
               </NavItem>
               <NavItem hidden={this.state.logged}>
                 <NavLink onClick={this.toggleRegistrationModal}>Register</NavLink>
               </NavItem>
               <NavItem hidden={!this.state.logged}>
-                <NavLink disabled className="text-white">Hello, {this.state.user.name}</NavLink>
+                <NavLink disabled>Hello, {this.state.user.name}</NavLink>
               </NavItem>
               <NavItem hidden={!this.state.logged}>
                 <NavLink onClick={this.handleLogoutClick} color="light">Logout</NavLink>
@@ -228,7 +228,11 @@ class App extends Component {
           
           {this.state.logged ? 
             <div>
-              <Button size="lg" block color="danger" onClick={this.toggleFavorites} className="mb-2 w-75 mx-auto">Favorites</Button>
+              <Row>
+                <Col sm="8" md="6" className="mx-auto">
+                  <Button size="lg" block color="danger" onClick={this.toggleFavorites} className="mb-2">Favorites</Button>
+                </Col>
+              </Row>
               <Collapse isOpen={this.state.showFavorites}>
                 <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart}/>
               </Collapse>
@@ -241,7 +245,7 @@ class App extends Component {
           
           <img className="background-image" src={process.env.PUBLIC_URL + '/images/bart-background.jpg'} alt="background"/>
         </main>
-        <small className="fixed-bottom" style={{zIndex: -1}}>Background by Corey Agopian on Unsplash</small>
+        <small className="fixed-bottom text-light">Background by Corey Agopian on Unsplash</small>
       </div>
     );
   }
