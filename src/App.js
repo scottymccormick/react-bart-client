@@ -8,6 +8,8 @@ import RoutePlanner from './components/RoutePlanner';
 import Favorites from './components/Favorites';
 import {  
   Collapse,
+  Row,
+  Col,
   Navbar,
   NavbarToggler,
   NavbarBrand,
@@ -201,15 +203,25 @@ class App extends Component {
             </Nav>
           </Collapse>
         </Navbar>
-        <main className="container">
+        <main className="container pb-4">
           
           <section className="my-5 p-3">
-          <Button size="lg" block color="primary" onClick={this.toggleStations} className="mb-2 w-75 mx-auto" >Stations</Button>
+          <Row>
+            <Col sm="8" md="6" className="mx-auto">
+              <Button size="lg" block color="primary" onClick={this.toggleStations} className="mb-2" >Stations</Button>
+            </Col>
+          </Row>
+          
           <Collapse isOpen={this.state.showStations}>
             <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/>
           </Collapse>
           
-          <Button size="lg" block color="success" onClick={this.toggleRoutePlanner} className="mb-2 w-75 mx-auto">Route Planner</Button>
+          <Row>
+            <Col sm="8" md="6" className="mx-auto">
+              <Button size="lg" block color="success" onClick={this.toggleRoutePlanner} className="mb-2">Route Planner</Button>
+            </Col>
+          </Row>
+          
           <Collapse isOpen={this.state.showRoutePlanner}>
             <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} />
           </Collapse>
@@ -226,7 +238,10 @@ class App extends Component {
             <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal}      showLogin={this.state.showLogin}/> : null}
           {this.state.showRegistration ? 
             <Registration handleLogin={this.handleLogin} /> : null }
+          
+          <img className="background-image" src={process.env.PUBLIC_URL + '/images/bart-background.jpg'} alt="background"/>
         </main>
+        <small className="fixed-bottom" style={{zIndex: -1}}>Background by Corey Agopian on Unsplash</small>
       </div>
     );
   }
