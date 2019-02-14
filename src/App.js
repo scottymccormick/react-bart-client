@@ -188,6 +188,9 @@ class App extends Component {
               <NavItem>
                 <NavLink onClick={this.toggleRegistrationModal}>Register</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink onClick={this.handleLogoutClick}>Logout</NavLink>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
