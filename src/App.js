@@ -14,6 +14,8 @@ class App extends Component {
     this.state = {
       logged: false,
       email: '',
+      userId: '',
+      quickStart: null,
       favorites: [],
       showLogin: false,
       showRegistration: false,
@@ -24,13 +26,25 @@ class App extends Component {
   }
   handleLogin = (user) => {
     console.log('handle login reached');
-    console.log('user', user)
+    console.log('user', user);
     this.setState({
       logged: true,
       email: user.email,
+      userId: user.userId,
       showLogin: false,
       showRegistration: false
     });
+    if (user.quickStart) {
+      axios.get(`http://localhost:9000/api/users/favorites/${user.quickStart}`)
+      .then((response) => {
+        console.log(response);
+        this.setState({quickStart: response.data})
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+    
   }
   handleLogoutClick = (e) => {
     console.log('reached logout');
@@ -40,6 +54,8 @@ class App extends Component {
         this.setState({
           logged: false,
           email: '',
+          userId: '',
+          quickStart: null,
           showFavorites: false
         });
       })
@@ -120,6 +136,36 @@ class App extends Component {
         console.log(err);
       })
   }
+  setQuickStart = (newQuickStart) => {
+    console.log('reached set quick start');
+    const userDbEntry = {
+      quickStart: newQuickStart
+    }
+    axios.put(`http://localhost:9000/api/users/${this.state.userId}`, userDbEntry)
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          quickStart: this.state.favorites.find((fav) => fav._id === newQuickStart)
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
+  removeQuickStart = (currentQuickStart) => {
+    console.log('remove from quick start', currentQuickStart);
+    const userDbEntry = {
+      quickStart: null
+    }
+    axios.put(`http://localhost:9000/api/users/${this.state.userId}`, userDbEntry)
+      .then((response) => {
+        console.log(response);
+        this.setState({quickStart: null});
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
   render() {
     return (
       <div className="App">
@@ -157,7 +203,7 @@ class App extends Component {
             <button onClick={this.toggleFavorites}>Favorites</button>
           </div> : null}
         {this.state.showFavorites ?
-          <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite}/> : null}
+          <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart}/> : null}
       </div>
     );
   }
