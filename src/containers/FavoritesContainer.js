@@ -13,6 +13,10 @@ const FavoritesContainer = (props) => {
               <span>{favorite.origin} => {favorite.destination}</span>
               : <span>{favorite.origin}</span>
             }
+            {favorite._id === props.quickStart._id ? 
+              <button onClick={props.removeQuickStart}>Remove from Quick Start</button> : 
+              <button onClick={props.setQuickStart}>Set as Quick Start</button>}
+            
             <button onClick={props.handleDelete.bind(null, favorite._id)}>Delete</button>
           </div>
         )
