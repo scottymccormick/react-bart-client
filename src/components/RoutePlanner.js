@@ -63,8 +63,7 @@ class RoutePlanner extends Component {
   render() {
     console.log(this.state)
     return (
-      <div>
-        <h2>Route Planner</h2>
+      <div className="bg-light">
         <RouteForm handleSubmit={this.handleSubmit} handleInput={this.handleInput} formInfo={this.state}/>
         <button onClick={this.props.hideRoutePlanner}>Close</button>
         {this.state.searched ?
