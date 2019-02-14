@@ -32,7 +32,7 @@ class Registration extends Component {
   render() {
     console.log(this.state)
     return (
-      <RegistrationForm handleChange={this.handleChange} user={this.state} handleSubmit={this.handleSubmit}/>
+      <RegistrationForm handleChange={this.handleChange} user={this.state} handleSubmit={this.handleSubmit} toggleRegistrationModal={this.props.toggleRegistrationModal} showRegistration={this.props.showRegistration}/>
     )
   }
 }

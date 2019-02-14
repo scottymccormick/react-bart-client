@@ -192,7 +192,7 @@ class App extends Component {
                 <NavLink onClick={this.toggleLoginModal} href="#">Login</NavLink>
               </NavItem>
               <NavItem hidden={this.state.logged}>
-                <NavLink onClick={this.toggleRegistrationModal}>Register</NavLink>
+                <NavLink onClick={this.toggleRegistrationModal} href="#">Register</NavLink>
               </NavItem>
               <NavItem hidden={!this.state.logged}>
                 <NavLink disabled>Hello, {this.state.user.name}</NavLink>
@@ -239,9 +239,9 @@ class App extends Component {
             </div> : null}
           </section>
           {this.state.showLogin ?
-            <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal}      showLogin={this.state.showLogin}/> : null}
+            <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal} showLogin={this.state.showLogin}/> : null}
           {this.state.showRegistration ? 
-            <Registration handleLogin={this.handleLogin} /> : null }
+            <Registration handleLogin={this.handleLogin} showRegistration={this.state.showRegistration} toggleRegistrationModal={this.toggleRegistrationModal} /> : null }
           
           <img className="background-image" src={process.env.PUBLIC_URL + '/images/bart-background.jpg'} alt="background"/>
         </main>

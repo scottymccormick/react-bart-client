@@ -1,24 +1,38 @@
 import React from 'react';
+import { 
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  FormGroup,
+  Label,
+  Input } from 'reactstrap';
 
 const RegistrationForm = (props) => {
   return (
     <div>
-      <h2>Registration Form</h2>
-      <form onSubmit={props.handleSubmit}>
-        <label>
-          Email:
-          <input type="email" name="email" value={props.user.email} onChange={props.handleChange}/><br/>
-        </label>
-        <label>
-          Name:
-          <input type="text" name="name" value={props.user.name} onChange={props.handleChange}/><br/>
-        </label>
-        <label>
-          Password:
-          <input type="password" name="password" value={props.user.password} onChange={props.handleChange}/><br/>
-        </label>
-        <input type="submit" value="Submit"/>
-      </form>
+      <Modal isOpen={props.showRegistration} toggle={props.toggleRegistrationModal}>
+        <ModalHeader >Register</ModalHeader>
+        <ModalBody>
+        <Form onSubmit={props.handleSubmit}>
+          <FormGroup>
+            <Label for="emailInput">Email:</Label>
+            <Input type="email" name="email" id="emailInput" onChange={props.handleChange} value={props.user.email}/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="nameInput">Name:</Label>
+            <Input type="text" name="name" id="nameInput" onChange={props.handleChange} value={props.user.name}/>
+          </FormGroup>
+          <FormGroup>
+            <Label>Password</Label>
+            <Input type="password" name="password" id="passwordInput" onChange={props.handleChange} value={props.user.password}/>
+          </FormGroup>
+          <Button color="success" className="ml-2 float-right">Submit</Button>
+        </Form>
+        <Button color="secondary" className="mx-2 float-right" onClick={props.toggleRegistrationModal}>Cancel</Button>
+        </ModalBody>
+      </Modal>
     </div>
   )
 }
