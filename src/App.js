@@ -13,7 +13,8 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink } from 'reactstrap';
+  NavLink,
+  Button } from 'reactstrap';
 
 class App extends Component {
   constructor() {
@@ -179,7 +180,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App h-100">
       <Navbar color="dark" dark expand="md">
           <NavbarBrand href="/">BART Track</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -200,26 +201,30 @@ class App extends Component {
             </Nav>
           </Collapse>
         </Navbar>
-        {this.state.showLogin ?
-          <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal}      showLogin={this.state.showLogin}/> : null}
-        {this.state.showRegistration ? 
-          <Registration handleLogin={this.handleLogin} /> : null }
-        {this.state.showStations ? 
-          <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : 
-          <div>
-            <button onClick={this.toggleStations}>Stations</button>
-          </div> }
-        {this.state.showRoutePlanner ?
-          <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} /> :
-          <div>
-            <button onClick={this.toggleRoutePlanner}>Route Planner</button>
-          </div> }
-        {this.state.logged ? 
-          <div>
-            <button onClick={this.toggleFavorites}>Favorites</button>
-          </div> : null}
-        {this.state.showFavorites ?
-          <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart}/> : null}
+        <main className="container">
+          {this.state.showLogin ?
+            <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal}      showLogin={this.state.showLogin}/> : null}
+          {this.state.showRegistration ? 
+            <Registration handleLogin={this.handleLogin} /> : null }
+          <section className="my-5 p-3">
+          {this.state.showStations ? 
+            <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : 
+            <div>
+              <Button size="lg" block color="primary" onClick={this.toggleStations} className="my-2" >Stations</Button>
+            </div> }
+          {this.state.showRoutePlanner ?
+            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} /> :
+            <div>
+              <Button size="lg" block color="success" onClick={this.toggleRoutePlanner}>Route Planner</Button>
+            </div> }
+          {this.state.logged ? 
+            <div>
+              <Button size="lg" block onClick={this.toggleFavorites}>Favorites</Button>
+            </div> : null}
+          {this.state.showFavorites ?
+            <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart}/> : null}
+          </section>
+        </main>
       </div>
     );
   }
