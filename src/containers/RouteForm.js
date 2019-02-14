@@ -29,13 +29,17 @@ const RouteForm = (props) => {
             </FormGroup>
           </Col>
         </Row>
-        { props.formInfo.origin === '' || props.formInfo.destination === '' || props.formInfo.origin === props.formInfo.destination ? 
-          <Button color="success" type="submit" disabled>Submit</Button> : 
-          <Button color="success" type="submit" >Submit</Button>  }
-        
-        <Button color="light" onClick={props.clearForm}>Clear</Button>
+        <Row className="justify-content-center">
+          <Col sm={3}>
+            { props.formInfo.origin === '' || props.formInfo.destination === '' || props.formInfo.origin === props.formInfo.destination ? 
+              <Button color="success" type="primary" className="mx-1 w-75 w-sm-auto" disabled>Submit</Button> : 
+              <Button color="success" type="primary" className="mx-1 w-75 w-sm-auto">Submit</Button>  }
+          </Col>
+          <Col sm={3}>
+            <Button color="warning" className="mx-1 my-2 my-sm-0 w-75 w-sm-auto" onClick={props.clearForm}>Clear</Button>
+          </Col>
+        </Row>
       </Form>
-      
     </div>
   )
 }
