@@ -30,7 +30,7 @@ class Login extends Component {
   }
   render() {
     return (
-      <LoginForm handleInput={this.handleInput} handleSubmit={this.handleSubmit} handleLogoutClick={this.handleLogoutClick} email={this.state.email} password={this.state.password} currentUser={this.props.currentUser}/>
+      <LoginForm handleInput={this.handleInput} handleSubmit={this.handleSubmit} handleLogoutClick={this.handleLogoutClick} email={this.state.email} password={this.state.password} currentUser={this.props.currentUser} toggleLoginModal={this.props.toggleLoginModal} showLogin={this.props.showLogin}/>
     )
   }
 }

@@ -201,7 +201,7 @@ class App extends Component {
             <button onClick={this.toggleRegistrationModal}>Register</button>
           </div> : null}
         {this.state.showLogin ?
-          <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state}/> : null}
+          <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal}      showLogin={this.state.showLogin}/> : null}
         {this.state.showRegistration ? 
           <Registration handleLogin={this.handleLogin} /> : null }
         {this.state.logged ? 
