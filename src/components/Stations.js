@@ -48,10 +48,8 @@ class Stations extends Component {
       this.setState({
         currentStation: this.props.quickStart.origin
       });
-      console.log('updated current station')
       this.props.endOpenQuickStart();
     }
-    console.log(this.props.openFavorite, 'open favorite index')
     if (prevProps.openFavorite !== this.props.openFavorite &&
       this.props.openFavorite > -1 && 
       this.props.favorites.length > 0 && 
@@ -60,12 +58,10 @@ class Stations extends Component {
         currentStation: this.props.favorites[this.props.openFavorite].origin
       });
       this.props.endOpenFavorite();
-      console.log('favorites', this.props.favorites);
     }
   }
   render() {
     
-    console.log('current station', this.state.currentStation)
     return (
       <div className="my-4 p-4 bg-dark">
         <StationPicker stations={this.state.stations} selectStation={this.selectStation} origin={this.state.currentStation} chooseStation={this.chooseStation} />
