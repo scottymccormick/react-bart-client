@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RouteForm from '../containers/RouteForm';
 import axios from 'axios';
 import RouteResults from '../containers/RouteResults';
+import { Spinner } from 'reactstrap';
 
 class RoutePlanner extends Component {
   constructor() {
@@ -75,7 +76,7 @@ class RoutePlanner extends Component {
         {/* <button onClick={this.props.hideRoutePlanner}>Clear</button> */}
         {this.state.searched ?
           (this.state.routes.length > 0 ? 
-          <RouteResults results={this.state.routes} origin={this.state.origin} destination={this.state.destination} addFavorite={this.props.addFavorite} logged={this.props.logged} favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} /> : <p>Loading...</p>)
+          <RouteResults results={this.state.routes} origin={this.state.origin} destination={this.state.destination} addFavorite={this.props.addFavorite} logged={this.props.logged} favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} /> : <Spinner color="primary" />)
           : null }
       </div>
     )

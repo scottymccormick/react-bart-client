@@ -1,19 +1,24 @@
 import React from 'react';
+import { Card, CardTitle, CardBody, CardText, Row } from 'reactstrap';
 
 const RouteResults = (props) => {
   const routeOptions = props.results.map((result, i) => {
     return (
-      <div key={i}>
-        {result.leg.map((eachLeg, j) => {
-          return (
-            <div key={j}>
-              {result.leg.length > 1 ? <h4>Leg {j + 1}</h4>	: null}
-              <p> Leave from {eachLeg['@origin']} at {eachLeg['@origTimeMin']} on the {eachLeg['@trainHeadStation']} train</p>
-              <p> Arrive at {eachLeg['@destination']} at {eachLeg['@destTimeMin']}</p>
-            </div>
-          )
-        })}
-        <hr/>
+      <div key={i} className=" bg-secondary mb-3" >
+        <CardTitle className="text-primary">
+          {result['@tripTime']} min
+        </CardTitle>
+        <Row className="d-flex justify-content-center">
+          {result.leg.map((eachLeg, j) => {
+            return (
+              <Card key={j} className="w-50">
+                {result.leg.length > 1 ? <CardTitle>Leg {j + 1}</CardTitle>	: null}
+                <CardText> Leave from {eachLeg['@origin']} at {eachLeg['@origTimeMin']} on the {eachLeg['@trainHeadStation']} train</CardText>
+                <CardText> Arrive at {eachLeg['@destination']} at {eachLeg['@destTimeMin']}</CardText>
+              </Card>
+            )
+          })}
+        </Row>
       </div>
     )
   });
