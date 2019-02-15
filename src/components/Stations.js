@@ -45,7 +45,7 @@ class Stations extends Component {
   }
   render() {
     return (
-      <div className="my-4">
+      <div className="my-4 bg-dark">
         {/* <button onClick={this.props.hideStations}>Hide Stations</button> */}
         
         <StationPicker stations={this.state.stations} selectStation={this.selectStation} origin={this.state.currentStation} chooseStation={this.chooseStation} />

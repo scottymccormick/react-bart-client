@@ -206,9 +206,16 @@ class App extends Component {
         <main className="container pb-4">
           
           <section className="my-5 p-3">
+          {this.state.logged ? 
+            <Row>
+              <Col sm={8} md={6} className="mx-auto">
+                <Button size="lg" block color="primary" className="mb-2" >Quick Start</Button>
+              </Col>
+            </Row> : null
+          }
           <Row>
             <Col sm={this.state.showStations ? "12" : "8"} md={this.state.showStations ? "12" : "6"} className="mx-auto" style={{transition: '.5s ease-in-out'}}>
-              <Button size="lg" block color="primary" onClick={this.toggleStations} className="mb-2" >Stations</Button>
+              <Button size="lg" block color="dark" onClick={this.toggleStations} className="mb-2" >Stations</Button>
             </Col>
           </Row>
           
@@ -218,7 +225,7 @@ class App extends Component {
           
           <Row>
             <Col sm={this.state.showRoutePlanner ? "12" : "8"} md={this.state.showRoutePlanner ? "12" : "6"} className="mx-auto" style={{transition: '.5s ease-in-out'}}>
-              <Button size="lg" block color="success" onClick={this.toggleRoutePlanner} className="mb-2">Route Planner</Button>
+              <Button size="lg" block color="light" onClick={this.toggleRoutePlanner} className="mb-2">Route Planner</Button>
             </Col>
           </Row>
           
