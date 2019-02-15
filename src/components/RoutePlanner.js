@@ -26,7 +26,7 @@ class RoutePlanner extends Component {
 
     console.log('reached route planner form submit');
 
-    const urlString = `http://localhost:9000/api/routes?orig=${this.state.origin}&dest=${this.state.destination}`;
+    const urlString = `${process.env.REACT_APP_API}/api/routes?orig=${this.state.origin}&dest=${this.state.destination}`;
 
     this.setState({
       searched: true,
@@ -59,7 +59,7 @@ class RoutePlanner extends Component {
     this.setState({
       searched: false
     })
-    axios.get('http://localhost:9000/api/stations')
+    axios.get(`${process.env.REACT_APP_API}/api/stations`)
       .then((response) => {
         if (response.status === 200) {
           this.setState({

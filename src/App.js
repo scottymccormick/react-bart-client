@@ -50,7 +50,7 @@ class App extends Component {
       showRegistration: false
     });
     if (user.quickStart) {
-      axios.get(`http://localhost:9000/api/users/favorites/${user.quickStart}`)
+      axios.get(`${process.env.REACT_APP_API}/api/users/favorites/${user.quickStart}`)
       .then((response) => {
         console.log(response);
         this.setState({quickStart: response.data})
@@ -63,7 +63,7 @@ class App extends Component {
   }
   handleLogoutClick = (e) => {
     console.log('reached logout');
-    axios.get('http://localhost:9000/api/users/logout')
+    axios.get(`${process.env.REACT_APP_API}/api/users/logout`)
       .then((response) => {
         console.log('logout response',response);
         this.setState({
@@ -112,7 +112,7 @@ class App extends Component {
     if (destination && typeof destination === 'string') {
       newFavorite.destination = destination;
     }
-    axios.post('http://localhost:9000/api/users/favorites', newFavorite)
+    axios.post(`${process.env.REACT_APP_API}/api/users/favorites`, newFavorite)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -125,7 +125,7 @@ class App extends Component {
   }
   getFavorites = () => {
     console.log('get favorites reached');
-    axios.get(`http://localhost:9000/api/users/favorites?email=${this.state.email}`)
+    axios.get(`${process.env.REACT_APP_API}/api/users/favorites?email=${this.state.email}`)
       .then((response) => {
         if (response.status === 200) {
           console.log(response);
@@ -140,7 +140,7 @@ class App extends Component {
   }
   deleteFavorite = (favoriteId, e) => {
     console.log('reached delete favorite', favoriteId)
-    axios.delete(`http://localhost:9000/api/users/favorites/${favoriteId}`)
+    axios.delete(`${process.env.REACT_APP_API}/api/users/favorites/${favoriteId}`)
       .then((response) => {
         if (response.status === 200) {
           console.log(response);
@@ -162,7 +162,7 @@ class App extends Component {
     const userDbEntry = {
       quickStart: newQuickStart
     }
-    axios.put(`http://localhost:9000/api/users/${this.state.userId}`, userDbEntry)
+    axios.put(`${process.env.REACT_APP_API}/api/users/${this.state.userId}`, userDbEntry)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -178,7 +178,7 @@ class App extends Component {
     const userDbEntry = {
       quickStart: null
     }
-    axios.put(`http://localhost:9000/api/users/${this.state.userId}`, userDbEntry)
+    axios.put(`${process.env.REACT_APP_API}/api/users/${this.state.userId}`, userDbEntry)
       .then((response) => {
         console.log(response);
         this.setState({quickStart: null});

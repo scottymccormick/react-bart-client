@@ -13,7 +13,7 @@ class Stations extends Component {
     }
   }
   getStations() {
-    axios.get('http://localhost:9000/api/stations')
+    axios.get(`${process.env.REACT_APP_API}/api/stations`)
       .then((response) => {
         if (response.status === 200) {
           this.setState({

@@ -13,7 +13,7 @@ class Station extends Component {
     }
   }
   getEtds = () => {
-    axios.get(`http://localhost:9000/api/stations/etd/${this.props.currentStation}`)
+    axios.get(`${process.env.REACT_APP_API}/api/stations/etd/${this.props.currentStation}`)
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data)
