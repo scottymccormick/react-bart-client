@@ -43,7 +43,18 @@ class Stations extends Component {
   componentDidMount() {
     this.getStations();
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.openQuickStart !== this.props.openQuickStart && this.props.openQuickStart && !this.props.quickStart.destination && this.state.currentStation !== this.props.quickStart.origin) {
+      this.setState({
+        currentStation: this.props.quickStart.origin
+      });
+      console.log('updated current station')
+      this.props.endOpenQuickStart();
+    }
+  }
   render() {
+    
+    console.log('current station', this.state.currentStation)
     return (
       <div className="my-4 bg-dark">
         {/* <button onClick={this.props.hideStations}>Hide Stations</button> */}

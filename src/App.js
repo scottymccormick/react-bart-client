@@ -33,7 +33,8 @@ class App extends Component {
       showRegistration: false,
       showStations: false,
       showRoutePlanner: false,
-      showFavorites: false
+      showFavorites: false,
+      openQuickStart: false
     }
   }
   handleLogin = (user) => {
@@ -83,19 +84,23 @@ class App extends Component {
   toggleStations = () => {
     this.setState({
       showStations: !this.state.showStations,
-      showRoutePlanner: false
+      showRoutePlanner: false,
+      showFavorites: false
     });
   }
   toggleRoutePlanner = () => {
     this.setState({
       showRoutePlanner: !this.state.showRoutePlanner,
-      showStations: false
+      showStations: false,
+      showFavorites: false
     });
   }
   toggleFavorites = () => {
     console.log('reached toggle favorites')
     this.setState({
-      showFavorites: !this.state.showFavorites
+      showFavorites: !this.state.showFavorites,
+      showStations: false,
+      showRoutePlanner: false
     });
   }
   addFavorite = (origin, destination, e) => {
@@ -180,6 +185,30 @@ class App extends Component {
         console.log(err)
       });
   }
+  toggleOpenQuickStart = async () => {
+    await this.setState({
+      openQuickStart: true,
+      showFavorites: false,
+      showRoutePlanner: false,
+      showStations: false
+    });
+    if (this.state.quickStart.destination) {
+      console.log('go to route planner')
+    } else {
+      console.log('go to stations');
+      await this.setState({
+        showStations: true,
+        showRoutePlanner: false
+      })
+      console.log('open qs:', this.state.openQuickStart)
+    }
+  }
+  endOpenQuickStart = async () => {
+    this.setState({
+      openQuickStart: false
+    });
+    console.log('ended open quick start')
+  }
   render() {
     return (
       <div className="App h-100">
@@ -209,18 +238,18 @@ class App extends Component {
           {this.state.logged ? 
             <Row>
               <Col sm={8} md={6} className="mx-auto">
-                <Button size="lg" block color="primary" className="mb-2" >Quick Start</Button>
+                <Button size="lg" block color="success" className="mb-2" onClick={this.toggleOpenQuickStart}>Quick Start</Button>
               </Col>
             </Row> : null
           }
           <Row>
             <Col sm={this.state.showStations ? "12" : "8"} md={this.state.showStations ? "12" : "6"} className="mx-auto" style={{transition: '.5s ease-in-out'}}>
-              <Button size="lg" block color="dark" onClick={this.toggleStations} className="mb-2" >Stations</Button>
+              <Button size="lg" block color="primary" onClick={this.toggleStations} className="mb-2" >Stations</Button>
             </Col>
           </Row>
           
           <Collapse isOpen={this.state.showStations} style={{transition: '.5s ease-in-out'}}>
-            <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/>
+            <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart}/>
           </Collapse>
           
           <Row>

@@ -71,7 +71,6 @@ class RoutePlanner extends Component {
       })
   }
   render() {
-    console.log(this.state)
     return (
       <div className="bg-light">
         <RouteForm handleSubmit={this.handleSubmit} handleInput={this.handleInput} formInfo={this.state} clearForm={this.clearForm}/>
