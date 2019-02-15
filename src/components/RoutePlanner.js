@@ -94,7 +94,7 @@ class RoutePlanner extends Component {
   }
   render() {
     return (
-      <div className="bg-light">
+      <div className="bg-light pb-3 my-2 mb-4">
         <RouteForm handleSubmit={this.handleSubmit} handleInput={this.handleInput} formInfo={this.state} clearForm={this.clearForm}/>
         {this.state.searched ?
           (this.state.routes.length > 0 ? 

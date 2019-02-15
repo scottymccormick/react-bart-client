@@ -29,7 +29,7 @@ class Station extends Component {
   }
   getFavIndex() {
     const favIndex = this.props.favorites.findIndex((fav) => {
-      return fav.origin === this.props.currentStation
+      return fav.origin === this.props.currentStation && !fav.destination
     });
     return favIndex;
   }

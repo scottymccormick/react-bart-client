@@ -10,6 +10,10 @@ const FavoritesContainer = (props) => {
           props.quickStart.origin + ' to ' + props.quickStart.destination : 
           props.quickStart.origin) : 
         'Not Set'}</h4>
+      
+      {props.favorites.length === 0 ? 
+        <h5 className="mt-4">No Favorites Saved</h5> : null }
+
       {props.favorites.map((favorite, i) => {
         return (
           <Row key={i}>

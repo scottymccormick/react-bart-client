@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle, CardSubtitle, CardBody, CardText, Row, Col } from 'reactstrap';
+import { Card, CardTitle, CardSubtitle, CardBody, CardText, Row, Col , Button} from 'reactstrap';
 
 const RouteResults = (props) => {
   const routeOptions = props.results.map((result, i) => {
@@ -36,19 +36,15 @@ const RouteResults = (props) => {
   });
   return (
     <div>
-      <h4>Route Results</h4>
+      {routeOptions}
       {
         props.logged ? 
         <div>
-          <br/>
           {favIndex > -1 ? 
-            <button onClick={props.deleteFavorite.bind(null, props.favorites[favIndex]._id)}>Remove from Favorites</button> : 
-            <button onClick={props.addFavorite.bind(null, props.origin, props.destination)}>Add to Favorites</button>}
-          
-          <br/>
+            <Button color="danger" onClick={props.deleteFavorite.bind(null, props.favorites[favIndex]._id)}>Remove from Favorites</Button> : 
+            <Button color="success" onClick={props.addFavorite.bind(null, props.origin, props.destination)}>Add to Favorites</Button> }
         </div> : null
       }
-      {routeOptions}
     </div>
   )
 }

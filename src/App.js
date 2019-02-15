@@ -294,7 +294,7 @@ class App extends Component {
             <div>
               <Row>
                 <Col sm="8" md="6" className="mx-auto">
-                  <Button size="lg" block color="danger" onClick={this.toggleFavorites} className="mb-2">Favorites</Button>
+                  <Button size="lg" block color="secondary" onClick={this.toggleFavorites} className="mb-2">Favorites</Button>
                 </Col>
               </Row>
               <Collapse isOpen={this.state.showFavorites}>

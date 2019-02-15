@@ -39,7 +39,7 @@ const StationPage = (props) => {
         props.logged ? 
         <div>
           {props.favIndex > -1 ? 
-            <Button color="warning" onClick={props.deleteFavorite.bind(null, props.favorites[props.favIndex]._id)}>Remove from Favorites</Button> : 
+            <Button color="danger" onClick={props.deleteFavorite.bind(null, props.favorites[props.favIndex]._id)}>Remove from Favorites</Button> : 
             <Button color="success" onClick={props.addFavorite.bind(null, props.currentStation)}>Add to Favorites</Button>}
           
         </div> : null
