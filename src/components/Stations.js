@@ -51,6 +51,17 @@ class Stations extends Component {
       console.log('updated current station')
       this.props.endOpenQuickStart();
     }
+    console.log(this.props.openFavorite, 'open favorite index')
+    if (prevProps.openFavorite !== this.props.openFavorite &&
+      this.props.openFavorite > -1 && 
+      this.props.favorites.length > 0 && 
+      !this.props.favorites[this.props.openFavorite].destination) {
+      this.setState({
+        currentStation: this.props.favorites[this.props.openFavorite].origin
+      });
+      this.props.endOpenFavorite();
+      console.log('favorites', this.props.favorites);
+    }
   }
   render() {
     
@@ -61,7 +72,7 @@ class Stations extends Component {
         
         <StationPicker stations={this.state.stations} selectStation={this.selectStation} origin={this.state.currentStation} chooseStation={this.chooseStation} />
         {this.state.currentStation ? 
-          <Station currentStation={this.state.currentStation} goBack={this.deselectStation} logged={this.props.logged} email={this.props.email} addFavorite={this.props.addFavorite} deleteFavorite={this.props.deleteFavorite} favorites={this.props.favorites}/> : null	}
+          <Station currentStation={this.state.currentStation} goBack={this.deselectStation} logged={this.props.logged} email={this.props.email} addFavorite={this.props.addFavorite} deleteFavorite={this.props.deleteFavorite} favorites={this.props.favorites} openFavorite={this.props.openFavorite}/> : null	}
       </div>
     )
   }

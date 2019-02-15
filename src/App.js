@@ -215,9 +215,16 @@ class App extends Component {
   setOpenFavorite = async (favoriteIndex) => {
     console.log('Favorite idx:', favoriteIndex)
     if (this.state.favorites[favoriteIndex].destination) {
-      console.log('favorite in route planner')
+      console.log('favorite in route planner');
+
     } else {
       console.log('favorite in stations')
+      await this.setState({
+        openFavorite: favoriteIndex,
+        showStations: true,
+        showRoutePlanner: false,
+        showFavorites: false
+      })
     }
   }
   endOpenFavorite = () => {
@@ -265,7 +272,7 @@ class App extends Component {
           </Row>
           
           <Collapse isOpen={this.state.showStations} style={{transition: '.5s ease-in-out'}}>
-            <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart}/>
+            <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart} openFavorite={this.state.openFavorite} endOpenFavorite={this.endOpenFavorite}/>
           </Collapse>
           
           <Row>
@@ -275,7 +282,7 @@ class App extends Component {
           </Row>
           
           <Collapse isOpen={this.state.showRoutePlanner}>
-            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart}/>
+            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart} openFavorite={this.state.openFavorite}/>
           </Collapse>
           
           {this.state.logged ? 
