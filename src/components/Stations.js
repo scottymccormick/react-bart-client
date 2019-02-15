@@ -56,7 +56,7 @@ class Stations extends Component {
     
     console.log('current station', this.state.currentStation)
     return (
-      <div className="my-4 bg-dark">
+      <div className="my-4 p-4 bg-dark">
         {/* <button onClick={this.props.hideStations}>Hide Stations</button> */}
         
         <StationPicker stations={this.state.stations} selectStation={this.selectStation} origin={this.state.currentStation} chooseStation={this.chooseStation} />
