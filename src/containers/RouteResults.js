@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle, CardSubtitle, CardBody, CardText, Row, Col , Button} from 'reactstrap';
+import { Card, CardTitle, CardSubtitle, CardBody, CardText, Row, Col} from 'reactstrap';
 
 const RouteResults = (props) => {
   const routeOptions = props.results.map((result, i) => {
