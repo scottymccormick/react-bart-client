@@ -20,10 +20,10 @@ class Registration extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('registration submit reached');
-    axios.post('http://localhost:9000/api/users/register', this.state)
+    axios.post(`${process.env.REACT_APP_API}/api/users/register`, this.state)
       .then((response) => {
         console.log('register response', response);
-        this.props.handleLogin(this.state);
+        this.props.handleLogin(response.data);
       })
       .catch((error) => {
         console.log(error);

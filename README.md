@@ -2,6 +2,8 @@
 
 ## Project 3
 
+Use the app: [Deployed on Heroku](https://barttrack.herokuapp.com/)
+
 ### Summary
 
 BART Track is a full stack application that lists real-time departures and gives trip planning options for the Bay Area Rapid Transit (BART) system.
@@ -11,6 +13,10 @@ BART Track is a full stack application that lists real-time departures and gives
 - Front End: React
 - Back End: Express, MongoDB
 - Third Party APIs: [BART API](http://api.bart.gov/)
+
+The styling for the front end is done with Bootstrap using the Bootswatch theme Cosmo.
+
+
 
 ## User Stories
 
@@ -107,3 +113,41 @@ BART Track is a full stack application that lists real-time departures and gives
 - Start Station (String) *for stations and routes*
 - End Station (String, optional) *only for routes*
 - User: User.Id
+
+## Wireframes
+
+- Landing Page (not logged in)
+
+![Landing Page](wireframes/LandingPage.JPG)
+
+- Landing Page (logged in)
+
+![Landing Page logged in](wireframes/LoggedInLandingPage.JPG)
+
+- Login Page
+
+![Login Page](wireframes/LoginPage.JPG)
+
+- Sign Up Page
+
+![Registration Page](wireframes/SignUpPage.JPG)
+
+- Favorites Page
+
+![Favorites Page](wireframes/FavoritesPage.JPG)
+
+- Stations Index
+
+![Stations Index](wireframes/StationsIndexPage.JPG)
+
+- Stations Show
+
+![Stations Show](wireframes/StationShowPage.JPG)
+
+- Routes Index
+
+![Routes Index](wireframes/RoutesIndex.JPG)
+
+- Routes Show
+
+![Routes Show](wireframes/RouteShowPage.JPG)

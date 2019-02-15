@@ -19,7 +19,7 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('submitted');
-    axios.post('http://localhost:9000/api/users/login', this.state)
+    axios.post(`${process.env.REACT_APP_API}/api/users/login`, this.state)
       .then((response) => {
         console.log('login response',response);
         this.props.handleLogin(response.data);
