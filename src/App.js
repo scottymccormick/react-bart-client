@@ -186,19 +186,21 @@ class App extends Component {
       });
   }
   toggleOpenQuickStart = async () => {
-    await this.setState({
-      openQuickStart: true,
-      showFavorites: false,
-      showRoutePlanner: false,
-      showStations: false
-    });
     if (this.state.quickStart.destination) {
-      console.log('go to route planner')
+      console.log('go to route planner');
+      await this.setState({
+        openQuickStart: true,
+        showStations: false,
+        showRoutePlanner: true,
+        showFavorites: false
+      })
     } else {
       console.log('go to stations');
       await this.setState({
+        openQuickStart: true,
         showStations: true,
-        showRoutePlanner: false
+        showRoutePlanner: false,
+        showFavorites: false
       })
       console.log('open qs:', this.state.openQuickStart)
     }
@@ -259,7 +261,7 @@ class App extends Component {
           </Row>
           
           <Collapse isOpen={this.state.showRoutePlanner}>
-            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} />
+            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart}/>
           </Collapse>
           
           {this.state.logged ? 

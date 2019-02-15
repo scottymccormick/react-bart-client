@@ -22,7 +22,7 @@ class RoutePlanner extends Component {
     });
   }
   handleSubmit = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     console.log('reached route planner form submit');
 
@@ -69,6 +69,17 @@ class RoutePlanner extends Component {
       .catch((err) => {
         console.log(err);
       })
+  }
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.openQuickStart !== this.props.openQuickStart && this.props.openQuickStart && this.props.quickStart.destination ) {
+      await this.setState({
+        origin: this.props.quickStart.origin,
+        destination: this.props.quickStart.destination
+      });
+      this.handleSubmit();
+      console.log('updated current station')
+      this.props.endOpenQuickStart();
+    }
   }
   render() {
     return (
