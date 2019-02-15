@@ -4,16 +4,6 @@ import { Button, ListGroup, ListGroupItem, Row, Col } from 'reactstrap';
 const StationPage = (props) => {
   return (
     <div className="mt-2">
-      {
-        props.logged ? 
-        <div>
-          
-          {props.favIndex > -1 ? 
-            <Button color="warning" onClick={props.deleteFavorite.bind(null, props.favorites[props.favIndex]._id)}>Remove from Favorites</Button> : 
-            <Button color="light" onClick={props.addFavorite.bind(null, props.currentStation)}>Add to Favorites</Button>}
-          
-        </div> : null
-      }
       { props.etd ? 
         props.etd.map((direction, i) => {
           return <div key={i}  className="text-dark bg-secondary pt-2">
@@ -44,6 +34,15 @@ const StationPage = (props) => {
               </ListGroup>
             </div>
         }) : null
+      }
+      {
+        props.logged ? 
+        <div>
+          {props.favIndex > -1 ? 
+            <Button color="warning" onClick={props.deleteFavorite.bind(null, props.favorites[props.favIndex]._id)}>Remove from Favorites</Button> : 
+            <Button color="success" onClick={props.addFavorite.bind(null, props.currentStation)}>Add to Favorites</Button>}
+          
+        </div> : null
       }
     </div>
   )

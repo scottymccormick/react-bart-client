@@ -216,7 +216,12 @@ class App extends Component {
     console.log('Favorite idx:', favoriteIndex)
     if (this.state.favorites[favoriteIndex].destination) {
       console.log('favorite in route planner');
-
+      await this.setState({
+        openFavorite: favoriteIndex,
+        showStations: false,
+        showRoutePlanner: true,
+        showFavorites: false
+      })
     } else {
       console.log('favorite in stations')
       await this.setState({
@@ -282,7 +287,7 @@ class App extends Component {
           </Row>
           
           <Collapse isOpen={this.state.showRoutePlanner}>
-            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart} openFavorite={this.state.openFavorite}/>
+            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart} openFavorite={this.state.openFavorite} endOpenFavorite={this.endOpenFavorite}/>
           </Collapse>
           
           {this.state.logged ? 
