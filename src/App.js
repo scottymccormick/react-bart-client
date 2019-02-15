@@ -34,7 +34,8 @@ class App extends Component {
       showStations: false,
       showRoutePlanner: false,
       showFavorites: false,
-      openQuickStart: false
+      openQuickStart: false,
+      openFavorite: -1
     }
   }
   handleLogin = (user) => {
@@ -211,6 +212,19 @@ class App extends Component {
     });
     console.log('ended open quick start')
   }
+  setOpenFavorite = async (favoriteIndex) => {
+    console.log('Favorite idx:', favoriteIndex)
+    if (this.state.favorites[favoriteIndex].destination) {
+      console.log('favorite in route planner')
+    } else {
+      console.log('favorite in stations')
+    }
+  }
+  endOpenFavorite = () => {
+    this.setState({
+      openFavorite: -1
+    });
+  }
   render() {
     return (
       <div className="App h-100">
@@ -229,7 +243,7 @@ class App extends Component {
                 <NavLink disabled>Hello, {this.state.user.name}</NavLink>
               </NavItem>
               <NavItem hidden={!this.state.logged}>
-                <NavLink onClick={this.handleLogoutClick} color="light">Logout</NavLink>
+                <NavLink onClick={this.handleLogoutClick} color="light" href="#">Logout</NavLink>
               </NavItem>          
             </Nav>
           </Collapse>
@@ -272,7 +286,7 @@ class App extends Component {
                 </Col>
               </Row>
               <Collapse isOpen={this.state.showFavorites}>
-                <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart}/>
+                <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart} setOpenFavorite={this.setOpenFavorite} endOpenFavorite={this.endOpenFavorite}/>
               </Collapse>
             </div> : null}
           </section>
