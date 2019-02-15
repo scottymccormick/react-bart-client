@@ -148,7 +148,8 @@ class App extends Component {
             return favorite._id !== response.data._id;
           });
           this.setState({
-            favorites: updatedFavorites
+            favorites: updatedFavorites,
+            quickStart: null
           });
         }
       })
@@ -263,7 +264,7 @@ class App extends Component {
         <main className="container pb-4">
           
           <section className="my-5 p-3">
-          {this.state.logged ? 
+          {this.state.logged && this.state.quickStart ? 
             <Row>
               <Col sm={8} md={6} className="mx-auto">
                 <Button size="lg" block color="success" className="mb-2" onClick={this.toggleOpenQuickStart}>Quick Start</Button>
