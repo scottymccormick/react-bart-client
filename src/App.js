@@ -310,7 +310,7 @@ class App extends Component {
           
           <img className="background-image" src={process.env.PUBLIC_URL + '/images/bart-background.jpg'} alt="background"/>
         </main>
-        <small className="fixed-bottom text-light">Background by Corey Agopian on Unsplash</small>
+        <small className="fixed-bottom text-light" style={{zIndex: '-10'}}>Background by Corey Agopian on Unsplash</small>
       </div>
     );
   }

@@ -59,6 +59,7 @@ const StationPage = (props) => {
           
         </div> : null
       }
+      <Button color="primary" onClick={props.refresh}>Refresh</Button>
       {stationRows}
     </div>
   )
