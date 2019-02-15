@@ -1,31 +1,48 @@
 import React from 'react';
+import { Button, ListGroup, ListGroupItem, Row, Col } from 'reactstrap';
 
 const StationPage = (props) => {
   return (
-    <div>
-      <h3>Current Station: {props.stationName}</h3>
-      <button style={{display: "block", margin: 'auto'}} onClick={props.goBack}>Go Back</button>
+    <div className="mt-2">
+      { props.etd ? 
+        props.etd.map((direction, i) => {
+          return <div key={i}  className="text-dark bg-secondary pt-2">
+            <h5 className="text-light mx-3">  
+              {direction.destination}
+            </h5>
+              <ListGroup className="p-2 mb-3 mt-1">
+              {
+                direction.estimate.map((est,  j) => {
+                  console.log(direction)
+                  return <ListGroupItem className="my-1 text-dark" style={{}} key={j}>
+                    <Row className="justify-content-md-center">
+                      <Col xs="4" md="3">{Number(est.delay) > 0 ? 
+                        <span className="badge badge-warning badge-pill mx-1">{Math.ceil(Number(est.delay) / 60)} min delay</span> :
+                        <span className="badge badge-success badge-pill mx-1">On Time</span>
+                        }
+                      </Col>
+                      <Col xs="4" md="3">
+                        <span>{est.minutes}{est.minutes !== 'Leaving' ? ' min' : ''}</span>
+                      </Col>
+                      <Col xs="4" md="3">
+                        <span className="badge badge-secondary badge-pill mx-1">{est.length} cars</span>
+                      </Col>
+                    </Row>
+                  </ListGroupItem>
+                })
+              }
+              </ListGroup>
+            </div>
+        }) : null
+      }
       {
         props.logged ? 
         <div>
-          <br/>
           {props.favIndex > -1 ? 
-            <button onClick={props.deleteFavorite.bind(null, props.favorites[props.favIndex]._id)}>Remove from Favorites</button> : 
-            <button onClick={props.addFavorite.bind(null, props.currentStation)}>Add to Favorites</button>}
-          <br/>
+            <Button color="danger" onClick={props.deleteFavorite.bind(null, props.favorites[props.favIndex]._id)}>Remove from Favorites</Button> : 
+            <Button color="success" onClick={props.addFavorite.bind(null, props.currentStation)}>Add to Favorites</Button>}
+          
         </div> : null
-      }
-      { props.etd ? 
-        props.etd.map((direction, i) => {
-          return <div key={i} style={{width: '50%', display: "inline-block"}}>
-            <h4>{direction.destination}</h4>
-              {
-                direction.estimate.map((est, j) => {
-                  return <p key={j}>{est.minutes}{est.minutes !== 'Leaving' ? ' minutes' : ''}</p>
-                })
-              }
-            </div>
-        }) : null
       }
     </div>
   )
