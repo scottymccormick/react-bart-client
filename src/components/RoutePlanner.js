@@ -36,9 +36,11 @@ class RoutePlanner extends Component {
       .then((response) => {
         if (response.status === 200) {
           console.log(response);
-          this.setState({
-            routes: response.data.request.trip
-          })
+          if (response.data) {
+            this.setState({
+              routes: response.data.request.trip
+            })
+          }
         }
       })
       .catch((err) => {
@@ -76,7 +78,7 @@ class RoutePlanner extends Component {
         {/* <button onClick={this.props.hideRoutePlanner}>Clear</button> */}
         {this.state.searched ?
           (this.state.routes.length > 0 ? 
-          <RouteResults results={this.state.routes} origin={this.state.origin} destination={this.state.destination} addFavorite={this.props.addFavorite} logged={this.props.logged} favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} /> : <Spinner color="primary" />)
+          <RouteResults results={this.state.routes} origin={this.state.origin} destination={this.state.destination} addFavorite={this.props.addFavorite} logged={this.props.logged} favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} /> : <Spinner className="my-2" color="primary" />)
           : null }
       </div>
     )

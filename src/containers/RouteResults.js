@@ -1,21 +1,30 @@
 import React from 'react';
-import { Card, CardTitle, CardBody, CardText, Row } from 'reactstrap';
+import { Card, CardTitle, CardSubtitle, CardBody, CardText, Row, Col } from 'reactstrap';
 
 const RouteResults = (props) => {
   const routeOptions = props.results.map((result, i) => {
     return (
-      <div key={i} className=" bg-secondary mb-3" >
-        <CardTitle className="text-primary">
-          {result['@tripTime']} min
+      <div key={i} className="bg-secondary mb-3 py-2" >
+        <CardTitle className="text-light">
+          {props.origin} => {props.destination} ({result['@tripTime']} min)
         </CardTitle>
-        <Row className="d-flex justify-content-center">
+        <Row className="justify-content-center">
           {result.leg.map((eachLeg, j) => {
             return (
-              <Card key={j} className="w-50">
-                {result.leg.length > 1 ? <CardTitle>Leg {j + 1}</CardTitle>	: null}
-                <CardText> Leave from {eachLeg['@origin']} at {eachLeg['@origTimeMin']} on the {eachLeg['@trainHeadStation']} train</CardText>
-                <CardText> Arrive at {eachLeg['@destination']} at {eachLeg['@destTimeMin']}</CardText>
-              </Card>
+              <Col key={j} sm={6}>
+                <Card className="p-2">
+                  <CardTitle>
+                    {result.leg.length > 1 ? <CardTitle>Leg {j + 1}</CardTitle>	: null}
+                  </CardTitle>
+                  <CardSubtitle>
+                    {eachLeg['@trainHeadStation']}
+                  </CardSubtitle>
+                  <CardBody>
+                    <CardText> Depart: <strong>{eachLeg['@origin']}</strong> at {eachLeg['@origTimeMin']}</CardText>
+                    <CardText> Arrive: <strong>{eachLeg['@destination']}</strong> at {eachLeg['@destTimeMin']}</CardText>
+                  </CardBody>
+                </Card>
+              </Col>
             )
           })}
         </Row>
