@@ -11,7 +11,6 @@ const StationPage = (props) => {
         <ListGroup className="p-2 mb-3 mt-1">
         {
           direction.estimate.map((est,  j) => {
-            console.log(direction)
             return <ListGroupItem className="my-1 text-dark" style={{}} key={j}>
               <Row className="justify-content-md-center">
                 <Col xs="4">{Number(est.delay) > 0 ? 

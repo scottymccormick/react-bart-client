@@ -39,8 +39,6 @@ class App extends Component {
     }
   }
   handleLogin = (user) => {
-    console.log('handle login reached');
-    console.log('user', user);
     this.setState({
       logged: true,
       email: user.email,
@@ -52,7 +50,6 @@ class App extends Component {
     if (user.quickStart) {
       axios.get(`${process.env.REACT_APP_API}/api/users/favorites/${user.quickStart}`)
       .then((response) => {
-        console.log(response);
         this.setState({quickStart: response.data})
       })
       .catch((err) => {
@@ -62,10 +59,8 @@ class App extends Component {
     
   }
   handleLogoutClick = (e) => {
-    console.log('reached logout');
     axios.get(`${process.env.REACT_APP_API}/api/users/logout`)
       .then((response) => {
-        console.log('logout response',response);
         this.setState({
           logged: false,
           email: '',
@@ -97,7 +92,6 @@ class App extends Component {
     });
   }
   toggleFavorites = () => {
-    console.log('reached toggle favorites')
     this.setState({
       showFavorites: !this.state.showFavorites,
       showStations: false,
@@ -114,7 +108,6 @@ class App extends Component {
     }
     axios.post(`${process.env.REACT_APP_API}/api/users/favorites`, newFavorite)
       .then((response) => {
-        console.log(response);
         this.setState({
           favorites: [...this.state.favorites, response.data]
         });
@@ -124,7 +117,6 @@ class App extends Component {
       })
   }
   getFavorites = () => {
-    console.log('get favorites reached');
     axios.get(`${process.env.REACT_APP_API}/api/users/favorites?email=${this.state.email}`)
       .then((response) => {
         if (response.status === 200) {
@@ -139,11 +131,9 @@ class App extends Component {
       })
   }
   deleteFavorite = (favoriteId, e) => {
-    console.log('reached delete favorite', favoriteId)
     axios.delete(`${process.env.REACT_APP_API}/api/users/favorites/${favoriteId}`)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response);
           const updatedFavorites = this.state.favorites.filter((favorite) => {
             return favorite._id !== response.data._id;
           });
@@ -158,13 +148,11 @@ class App extends Component {
       })
   }
   setQuickStart = (newQuickStart) => {
-    console.log('reached set quick start');
     const userDbEntry = {
       quickStart: newQuickStart
     }
     axios.put(`${process.env.REACT_APP_API}/api/users/${this.state.userId}`, userDbEntry)
       .then((response) => {
-        console.log(response);
         this.setState({
           quickStart: this.state.favorites.find((fav) => fav._id === newQuickStart)
         })
@@ -174,13 +162,11 @@ class App extends Component {
       });
   }
   removeQuickStart = (currentQuickStart) => {
-    console.log('remove from quick start', currentQuickStart);
     const userDbEntry = {
       quickStart: null
     }
     axios.put(`${process.env.REACT_APP_API}/api/users/${this.state.userId}`, userDbEntry)
       .then((response) => {
-        console.log(response);
         this.setState({quickStart: null});
       })
       .catch((err) => {
@@ -189,7 +175,6 @@ class App extends Component {
   }
   toggleOpenQuickStart = async () => {
     if (this.state.quickStart.destination) {
-      console.log('go to route planner');
       await this.setState({
         openQuickStart: true,
         showStations: false,
@@ -197,26 +182,21 @@ class App extends Component {
         showFavorites: false
       })
     } else {
-      console.log('go to stations');
       await this.setState({
         openQuickStart: true,
         showStations: true,
         showRoutePlanner: false,
         showFavorites: false
       })
-      console.log('open qs:', this.state.openQuickStart)
     }
   }
   endOpenQuickStart = async () => {
     this.setState({
       openQuickStart: false
     });
-    console.log('ended open quick start')
   }
   setOpenFavorite = async (favoriteIndex) => {
-    console.log('Favorite idx:', favoriteIndex)
     if (this.state.favorites[favoriteIndex].destination) {
-      console.log('favorite in route planner');
       await this.setState({
         openFavorite: favoriteIndex,
         showStations: false,
@@ -224,7 +204,6 @@ class App extends Component {
         showFavorites: false
       })
     } else {
-      console.log('favorite in stations')
       await this.setState({
         openFavorite: favoriteIndex,
         showStations: true,

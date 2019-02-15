@@ -4,7 +4,6 @@ import { Button, Row, Col } from 'reactstrap';
 const FavoritesContainer = (props) => {
   return (
     <div className="bg-light p-3 m-2">
-      {console.log('fav container props',props)}
       <h4>Quick Start: {props.quickStart ? 
         (props.quickStart.destination ?
           props.quickStart.origin + ' to ' + props.quickStart.destination : 
