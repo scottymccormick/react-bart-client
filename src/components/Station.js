@@ -43,7 +43,7 @@ class Station extends Component {
   }
   render() {
     return (
-      <StationPage currentStation={this.props.currentStation} goBack={this.props.goBack} etd={this.state.etd} stationName={this.state.name} logged={this.props.logged} email={this.props.email} addFavorite={this.props.addFavorite} deleteFavorite={this.props.deleteFavorite} favorites={this.props.favorites} favIndex={this.getFavIndex()}/>
+      <StationPage currentStation={this.props.currentStation} goBack={this.props.goBack} etd={this.state.etd} stationName={this.state.name} logged={this.props.logged} email={this.props.email} addFavorite={this.props.addFavorite} deleteFavorite={this.props.deleteFavorite} favorites={this.props.favorites} favIndex={this.getFavIndex()} refresh={this.getEtds}/>
     )
   }
 }
