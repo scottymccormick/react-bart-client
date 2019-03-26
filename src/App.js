@@ -243,6 +243,19 @@ class App extends Component {
         <main className="container pb-4">
           
           <section className="my-5 p-3">
+
+          {/* New Layout starts here */}
+          <Row>
+            <Col xs={6}>
+              <Button size="lg" block color="primary" className="home-button" >Stations</Button>
+            </Col>
+            <Col xs={6}>
+              <Button size="lg" block color="light" className="home-button" >Route Planner</Button>
+            </Col>
+          </Row>
+
+          {/* New Layout ends here */}
+
           {this.state.logged && this.state.quickStart ? 
             <Row>
               <Col sm={8} md={6} className="mx-auto">

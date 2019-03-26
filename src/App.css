@@ -38,6 +38,13 @@
   z-index: -10;
 }
 
+.home-button {
+  border-radius: 5px;
+  height: 120px;
+  margin: 10px 0;
+  font-size: 1.5em;
+}
+
 @media screen and (max-width: 1200px) {
   .background-image {
     left: 50%;
