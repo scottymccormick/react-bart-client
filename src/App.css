@@ -49,6 +49,10 @@
   background-color: #fc9127;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 @media screen and (max-width: 1200px) {
   .background-image {
     left: 50%;
