@@ -45,6 +45,10 @@
   font-size: 1.5em;
 }
 
+.favorites-button {
+  background-color: #fc9127;
+}
+
 @media screen and (max-width: 1200px) {
   .background-image {
     left: 50%;

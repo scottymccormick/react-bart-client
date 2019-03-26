@@ -247,6 +247,14 @@ class App extends Component {
           {/* New Layout starts here */}
           <Row>
             <Col xs={6}>
+              <Button size="lg" block color="success" className="home-button" >Quick Start</Button>
+            </Col>
+            <Col xs={6}>
+              <Button size="lg" block color="info" className="home-button" >Favorites</Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>
               <Button size="lg" block color="primary" className="home-button" >Stations</Button>
             </Col>
             <Col xs={6}>
