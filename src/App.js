@@ -222,7 +222,9 @@ class App extends Component {
     return (
       <div className="App h-100">
         <Navbar color="light" primary="true" expand="xs">
+          {/* <RouterLink to="/"> */}
           <NavbarBrand href="/"><strong>BART Track</strong></NavbarBrand>
+          {/* </RouterLink> */}
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -243,29 +245,46 @@ class App extends Component {
         </Navbar>
         <main className="container pb-4">
           
-          <section className="my-5 p-3">
+        {/* New Layout starts here */}
+        <section className="my-5 p-3">
+          <Route exact path="/" render={() => 
+            <div>
+              <Row>
+                <Col xs={6}>
+                  <Button size="lg" block color="success" className="home-button" >Quick Start</Button>
+                </Col>
+                <Col xs={6}>
+                  <Button size="lg" block color="info" className="home-button" >Favorites</Button>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6}>
+                  <RouterLink to="/stations">
+                    <Button size="lg" block color="primary" className="home-button" >Stations</Button>
+                  </RouterLink>
+                </Col>
+                <Col xs={6}>
+                  <RouterLink to="/stations">
+                    <Button size="lg" block color="light" className="home-button" >Route Planner</Button>
+                  </RouterLink>
+                </Col>
+              </Row>
+            </div>
+          } />
 
-          {/* New Layout starts here */}
-          <Row>
-            <Col xs={6}>
-              <Button size="lg" block color="success" className="home-button" >Quick Start</Button>
-            </Col>
-            <Col xs={6}>
-              <Button size="lg" block color="info" className="home-button" >Favorites</Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={6}>
-              <RouterLink to="/stations">
-                <Button size="lg" block color="primary" className="home-button" >Stations</Button>
-              </RouterLink>
-            </Col>
-            <Col xs={6}>
-              <RouterLink to="/stations">
-                <Button size="lg" block color="light" className="home-button" >Route Planner</Button>
-              </RouterLink>
-            </Col>
-          </Row>
+          <Route exact path="/stations" render={() => 
+            <Stations 
+              hideStations={this.toggleStations} 
+              logged={this.state.logged} 
+              email={this.state.email} 
+              addFavorite={this.addFavorite} 
+              deleteFavorite={this.deleteFavorite} 
+              favorites={this.state.favorites} 
+              quickStart={this.state.quickStart} 
+              openQuickStart={this.state.openQuickStart} 
+              endOpenQuickStart={this.endOpenQuickStart} 
+              openFavorite={this.state.openFavorite} 
+              endOpenFavorite={this.endOpenFavorite} />} />
           
 
           {/* New Layout ends here */}
