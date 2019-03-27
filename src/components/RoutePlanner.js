@@ -12,7 +12,6 @@ class RoutePlanner extends Component {
     this.state = {
       origin: '',
       destination: '',
-      // stations: [],
       routes: [],
       searched: false
     }
@@ -62,20 +61,6 @@ class RoutePlanner extends Component {
       origin: query.origin,
       destination: query.dest
     })
-    axios.get(`${process.env.REACT_APP_API}/api/stations`)
-      .then((response) => {
-        if (response.status === 200) {
-          this.setState({
-            stations: response.data
-          })
-          if (this.state.origin && this.state.destination) {
-            this.handleSubmit()
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
   }
   componentDidUpdate = async (prevProps) => {
     if (prevProps.openQuickStart !== this.props.openQuickStart && this.props.openQuickStart && this.props.quickStart.destination ) {

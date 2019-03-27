@@ -33,11 +33,7 @@ class App extends Component {
       stations: [],
       favorites: [],
       showLogin: false,
-      showRegistration: false,
-      showStations: false,
-      showRoutePlanner: false,
-      showFavorites: false,
-      openFavorite: -1
+      showRegistration: false
     }
   }
   loadStations = () => {
@@ -92,27 +88,6 @@ class App extends Component {
   toggleRegistrationModal = () => {
     this.setState({showRegistration: !this.state.showRegistration});
   }
-  // toggleStations = () => {
-  //   this.setState({
-  //     showStations: !this.state.showStations,
-  //     showRoutePlanner: false,
-  //     showFavorites: false
-  //   });
-  // }
-  // toggleRoutePlanner = () => {
-  //   this.setState({
-  //     showRoutePlanner: !this.state.showRoutePlanner,
-  //     showStations: false,
-  //     showFavorites: false
-  //   });
-  // }
-  // toggleFavorites = () => {
-  //   this.setState({
-  //     showFavorites: !this.state.showFavorites,
-  //     showStations: false,
-  //     showRoutePlanner: false
-  //   });
-  // }
   addFavorite = (origin, destination, e) => {
     const newFavorite = {
       email: this.state.email,
@@ -198,28 +173,6 @@ class App extends Component {
       this.props.history.push(`/stations/${quickStart.origin}`)
     }
   }
-  // setOpenFavorite = async (favoriteIndex) => {
-  //   if (this.state.favorites[favoriteIndex].destination) {
-  //     await this.setState({
-  //       openFavorite: favoriteIndex,
-  //       showStations: false,
-  //       showRoutePlanner: true,
-  //       showFavorites: false
-  //     })
-  //   } else {
-  //     await this.setState({
-  //       openFavorite: favoriteIndex,
-  //       showStations: true,
-  //       showRoutePlanner: false,
-  //       showFavorites: false
-  //     })
-  //   }
-  // }
-  // endOpenFavorite = () => {
-  //   this.setState({
-  //     openFavorite: -1
-  //   });
-  // }
   componentDidMount() {
     this.loadStations()
   }
@@ -252,123 +205,78 @@ class App extends Component {
         </Navbar>
         <main className="container pb-4">
           
-        {/* New Layout starts here */}
-        <section className="my-5 p-3">
-          <Route exact path="/" render={() => 
-            <div>
-              {this.state.logged ? 
+          <section className="my-5 p-3">
+            <Route exact path="/" render={() => 
+              <div>
+                {this.state.logged ? 
+                  <Row className="justify-content-center">
+                    <Col xs={6} md={4}>
+                      {this.state.quickStart ? 
+                        <Button size="lg" block color="success" className="home-button" onClick={this.handleQuickStart}>Quick Start</Button>
+                        : 
+                        <Button size="lg" block color="success" className="home-button" disabled>Set Quick Start from Favorites</Button>
+                      }
+                    </Col>
+                    <Col xs={6} md={4}>
+                      <RouterLink to="/favorites">
+                        <Button size="lg" block color="info" className="home-button" >Favorites</Button>
+                      </RouterLink>
+                    </Col>
+                  </Row>
+                : null
+                }
                 <Row className="justify-content-center">
                   <Col xs={6} md={4}>
-                    {this.state.quickStart ? 
-                      <Button size="lg" block color="success" className="home-button" onClick={this.handleQuickStart}>Quick Start</Button>
-                      : 
-                      <Button size="lg" block color="success" className="home-button" disabled>Set Quick Start from Favorites</Button>
-                    }
+                    <RouterLink to="/stations">
+                      <Button size="lg" block color="primary" className="home-button" >Stations</Button>
+                    </RouterLink>
                   </Col>
                   <Col xs={6} md={4}>
-                    <RouterLink to="/favorites">
-                      <Button size="lg" block color="info" className="home-button" >Favorites</Button>
+                    <RouterLink to="/routeplanner">
+                      <Button size="lg" block color="light" className="home-button" >Route Planner</Button>
                     </RouterLink>
                   </Col>
                 </Row>
-              : null
-              }
-              <Row className="justify-content-center">
-                <Col xs={6} md={4}>
-                  <RouterLink to="/stations">
-                    <Button size="lg" block color="primary" className="home-button" >Stations</Button>
-                  </RouterLink>
-                </Col>
-                <Col xs={6} md={4}>
-                  <RouterLink to="/routeplanner">
-                    <Button size="lg" block color="light" className="home-button" >Route Planner</Button>
-                  </RouterLink>
-                </Col>
-              </Row>
-            </div>
-          } />
+              </div>
+            } />
 
-          <Route path="/stations" render={props => 
-            <Stations {...props}
-              stations={this.state.stations}
-              logged={this.state.logged} 
-              email={this.state.email} 
-              addFavorite={this.addFavorite} 
-              deleteFavorite={this.deleteFavorite} 
-              favorites={this.state.favorites} 
-              quickStart={this.state.quickStart} 
-              openFavorite={this.state.openFavorite} 
-              endOpenFavorite={this.endOpenFavorite} /> 
-            } 
-          />
-          <Route path="/routeplanner" render={props => 
-            <RoutePlanner {...props}
-              stations={this.state.stations}
-              logged={this.state.logged} 
-              addFavorite={this.addFavorite} 
-              deleteFavorite={this.deleteFavorite} 
-              favorites={this.state.favorites} 
-              quickStart={this.state.quickStart}
-              openFavorite={this.state.openFavorite} 
-              endOpenFavorite={this.endOpenFavorite}/>
-            } 
-          />
-          <Route exact path="/favorites" render={props => 
-            <Favorites {...props}
-              stations={this.state.stations}
-              email={this.state.email} 
-              favorites={this.state.favorites} 
-              getFavorites={this.getFavorites} 
-              deleteFavorite={this.deleteFavorite} 
-              quickStart={this.state.quickStart} 
-              removeQuickStart={this.removeQuickStart} 
-              setQuickStart={this.setQuickStart}
-              />
-            } 
-          />
+            <Route path="/stations" render={props => 
+              <Stations {...props}
+                stations={this.state.stations}
+                logged={this.state.logged} 
+                email={this.state.email} 
+                addFavorite={this.addFavorite} 
+                deleteFavorite={this.deleteFavorite} 
+                favorites={this.state.favorites} 
+                quickStart={this.state.quickStart}
+                /> 
+              } 
+            />
+            <Route path="/routeplanner" render={props => 
+              <RoutePlanner {...props}
+                stations={this.state.stations}
+                logged={this.state.logged} 
+                addFavorite={this.addFavorite} 
+                deleteFavorite={this.deleteFavorite} 
+                favorites={this.state.favorites} 
+                quickStart={this.state.quickStart}
+                />
+              } 
+            />
+            <Route exact path="/favorites" render={props => 
+              <Favorites {...props}
+                stations={this.state.stations}
+                email={this.state.email} 
+                favorites={this.state.favorites} 
+                getFavorites={this.getFavorites} 
+                deleteFavorite={this.deleteFavorite} 
+                quickStart={this.state.quickStart} 
+                removeQuickStart={this.removeQuickStart} 
+                setQuickStart={this.setQuickStart}
+                />
+              } 
+            />
 
-          
-
-          {/* New Layout ends here */}
-
-          {/* {this.state.logged && this.state.quickStart ? 
-            <Row>
-              <Col sm={8} md={6} className="mx-auto">
-                <Button size="lg" block color="success" className="mb-2" onClick={this.toggleOpenQuickStart}>Quick Start</Button>
-              </Col>
-            </Row> : null
-          }
-          <Row>
-            <Col sm={this.state.showStations ? "12" : "8"} md={this.state.showStations ? "12" : "6"} className="mx-auto" style={{transition: '.5s ease-in-out'}}>
-              <Button size="lg" block color="primary" onClick={this.toggleStations} className="mb-2" >Stations</Button>
-            </Col>
-          </Row>
-          
-          <Collapse isOpen={this.state.showStations} style={{transition: '.5s ease-in-out'}}>
-            <Stations hideStations={this.toggleStations} logged={this.state.logged} email={this.state.email} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart} openFavorite={this.state.openFavorite} endOpenFavorite={this.endOpenFavorite}/>
-          </Collapse>
-          
-          <Row>
-            <Col sm={this.state.showRoutePlanner ? "12" : "8"} md={this.state.showRoutePlanner ? "12" : "6"} className="mx-auto" style={{transition: '.5s ease-in-out'}}>
-              <Button size="lg" block color="light" onClick={this.toggleRoutePlanner} className="mb-2">Route Planner</Button>
-            </Col>
-          </Row>
-          
-          <Collapse isOpen={this.state.showRoutePlanner}>
-            <RoutePlanner hideRoutePlanner={this.toggleRoutePlanner} logged={this.state.logged} addFavorite={this.addFavorite} deleteFavorite={this.deleteFavorite} favorites={this.state.favorites} quickStart={this.state.quickStart} openQuickStart={this.state.openQuickStart} endOpenQuickStart={this.endOpenQuickStart} openFavorite={this.state.openFavorite} endOpenFavorite={this.endOpenFavorite}/>
-          </Collapse>
-          
-          {this.state.logged ? 
-            <div>
-              <Row>
-                <Col sm="8" md="6" className="mx-auto">
-                  <Button size="lg" block color="secondary" onClick={this.toggleFavorites} className="mb-2">Favorites</Button>
-                </Col>
-              </Row>
-              <Collapse isOpen={this.state.showFavorites}>
-                <Favorites email={this.state.email} favorites={this.state.favorites} getFavorites={this.getFavorites} deleteFavorite={this.deleteFavorite} quickStart={this.state.quickStart} removeQuickStart={this.removeQuickStart} setQuickStart={this.setQuickStart} setOpenFavorite={this.setOpenFavorite} endOpenFavorite={this.endOpenFavorite}/>
-              </Collapse>
-            </div> : null} */}
           </section>
           {this.state.showLogin ?
             <Login handleLogin={this.handleLogin} handleLogout={this.handleLogout} currentUser={this.state} toggleLoginModal={this.toggleLoginModal} showLogin={this.state.showLogin}/> : null}

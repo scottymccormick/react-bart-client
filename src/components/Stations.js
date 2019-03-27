@@ -26,8 +26,8 @@ class Stations extends Component {
                 email={this.props.email} 
                 addFavorite={this.props.addFavorite} 
                 deleteFavorite={this.props.deleteFavorite} 
-                favorites={this.props.favorites} 
-                openFavorite={this.props.openFavorite}/>
+                favorites={this.props.favorites}
+                />
             </div> 
             }
           />
