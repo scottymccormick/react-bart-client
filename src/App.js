@@ -254,7 +254,9 @@ class App extends Component {
                   <Button size="lg" block color="success" className="home-button" >Quick Start</Button>
                 </Col>
                 <Col xs={6}>
-                  <Button size="lg" block color="info" className="home-button" >Favorites</Button>
+                  <RouterLink to="/favorites">
+                    <Button size="lg" block color="info" className="home-button" >Favorites</Button>
+                  </RouterLink>
                 </Col>
               </Row>
               <Row>
@@ -301,6 +303,20 @@ class App extends Component {
               endOpenFavorite={this.endOpenFavorite}/>
             } 
           />
+          <Route exact path="/favorites" render={() => 
+            <Favorites 
+              email={this.state.email} 
+              favorites={this.state.favorites} 
+              getFavorites={this.getFavorites} 
+              deleteFavorite={this.deleteFavorite} 
+              quickStart={this.state.quickStart} 
+              removeQuickStart={this.removeQuickStart} 
+              setQuickStart={this.setQuickStart} 
+              setOpenFavorite={this.setOpenFavorite} 
+              endOpenFavorite={this.endOpenFavorite}/>
+            } 
+          />
+
           
 
           {/* New Layout ends here */}
