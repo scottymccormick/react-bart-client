@@ -274,7 +274,7 @@ class App extends Component {
             </div>
           } />
 
-          <Route path="/stations" render={(props) => 
+          <Route path="/stations" render={props => 
             <Stations {...props}
               hideStations={this.toggleStations} 
               logged={this.state.logged} 
@@ -289,8 +289,8 @@ class App extends Component {
               endOpenFavorite={this.endOpenFavorite} /> 
             } 
           />
-          <Route exact path="/routeplanner" render={() => 
-            <RoutePlanner 
+          <Route path="/routeplanner" render={props => 
+            <RoutePlanner {...props}
               hideRoutePlanner={this.toggleRoutePlanner} 
               ogged={this.state.logged} 
               addFavorite={this.addFavorite} 

@@ -3,6 +3,7 @@ import RouteForm from '../containers/RouteForm';
 import axios from 'axios';
 import RouteResults from '../containers/RouteResults';
 import { Spinner, Button } from 'reactstrap';
+import { parse as queryParse } from 'query-string';
 
 class RoutePlanner extends Component {
   constructor() {
@@ -89,6 +90,7 @@ class RoutePlanner extends Component {
     }
   }
   render() {
+    console.log(queryParse(this.props.location.search))
     const favIndex = this.props.favorites.findIndex((fav) => {
       return fav.origin === this.state.origin && fav.destination === this.state.destination
     });

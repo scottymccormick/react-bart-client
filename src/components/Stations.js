@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StationPicker from '../containers/StationPicker';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 import Station from './Station';
 
