@@ -6,7 +6,7 @@ import axios from 'axios';
 import Stations from './components/Stations';
 import RoutePlanner from './components/RoutePlanner';
 import Favorites from './components/Favorites';
-import { Link as RouterLink, Route } from 'react-router-dom';
+import { Link as RouterLink, Route, withRouter } from 'react-router-dom';
 import {  
   Collapse,
   Row,
@@ -36,7 +36,6 @@ class App extends Component {
       showStations: false,
       showRoutePlanner: false,
       showFavorites: false,
-      openQuickStart: false,
       openFavorite: -1
     }
   }
@@ -188,27 +187,15 @@ class App extends Component {
         console.log(err)
       });
   }
-  toggleOpenQuickStart = async () => {
-    if (this.state.quickStart.destination) {
-      await this.setState({
-        openQuickStart: true,
-        showStations: false,
-        showRoutePlanner: true,
-        showFavorites: false
-      })
+  handleQuickStart = () => {
+    const quickStart = this.state.quickStart
+    console.log(this.state)
+    if (quickStart.destination) {
+      const queryString = `/routeplanner?origin=${quickStart.origin}&dest=${quickStart.destination}`
+      this.props.history.push(queryString)
     } else {
-      await this.setState({
-        openQuickStart: true,
-        showStations: true,
-        showRoutePlanner: false,
-        showFavorites: false
-      })
+      this.props.history.push(`/stations/${quickStart.origin}`)
     }
-  }
-  endOpenQuickStart = async () => {
-    this.setState({
-      openQuickStart: false
-    });
   }
   setOpenFavorite = async (favoriteIndex) => {
     if (this.state.favorites[favoriteIndex].destination) {
@@ -239,9 +226,11 @@ class App extends Component {
     return (
       <div className="App h-100">
         <Navbar color="light" primary="true" expand="xs">
-          {/* <RouterLink to="/"> */}
-          <NavbarBrand href="/"><strong>BART Track</strong></NavbarBrand>
-          {/* </RouterLink> */}
+          <RouterLink to="/">
+              {/* <NavbarBrand> */}
+              <strong>BART Track</strong>
+              {/* </NavbarBrand> */}
+          </RouterLink>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -268,7 +257,7 @@ class App extends Component {
             <div>
               <Row className="justify-content-center">
                 <Col xs={6} md={4}>
-                  <Button size="lg" block color="success" className="home-button" >Quick Start</Button>
+                  <Button size="lg" block color="success" className="home-button" onClick={this.handleQuickStart} >Quick Start</Button>
                 </Col>
                 <Col xs={6} md={4}>
                   <RouterLink to="/favorites">
@@ -301,8 +290,6 @@ class App extends Component {
               deleteFavorite={this.deleteFavorite} 
               favorites={this.state.favorites} 
               quickStart={this.state.quickStart} 
-              openQuickStart={this.state.openQuickStart} 
-              endOpenQuickStart={this.endOpenQuickStart} 
               openFavorite={this.state.openFavorite} 
               endOpenFavorite={this.endOpenFavorite} /> 
             } 
@@ -315,9 +302,7 @@ class App extends Component {
               addFavorite={this.addFavorite} 
               deleteFavorite={this.deleteFavorite} 
               favorites={this.state.favorites} 
-              quickStart={this.state.quickStart} 
-              openQuickStart={this.state.openQuickStart} 
-              endOpenQuickStart={this.endOpenQuickStart} 
+              quickStart={this.state.quickStart}
               openFavorite={this.state.openFavorite} 
               endOpenFavorite={this.endOpenFavorite}/>
             } 
@@ -393,4 +378,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
