@@ -256,16 +256,23 @@ class App extends Component {
         <section className="my-5 p-3">
           <Route exact path="/" render={() => 
             <div>
-              <Row className="justify-content-center">
-                <Col xs={6} md={4}>
-                  <Button size="lg" block color="success" className="home-button" onClick={this.handleQuickStart} >Quick Start</Button>
-                </Col>
-                <Col xs={6} md={4}>
-                  <RouterLink to="/favorites">
-                    <Button size="lg" block color="info" className="home-button" >Favorites</Button>
-                  </RouterLink>
-                </Col>
-              </Row>
+              {this.state.logged ? 
+                <Row className="justify-content-center">
+                  <Col xs={6} md={4}>
+                    {this.state.quickStart ? 
+                      <Button size="lg" block color="success" className="home-button" onClick={this.handleQuickStart}>Quick Start</Button>
+                      : 
+                      <Button size="lg" block color="success" className="home-button" disabled>Set Quick Start from Favorites</Button>
+                    }
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <RouterLink to="/favorites">
+                      <Button size="lg" block color="info" className="home-button" >Favorites</Button>
+                    </RouterLink>
+                  </Col>
+                </Row>
+              : null
+              }
               <Row className="justify-content-center">
                 <Col xs={6} md={4}>
                   <RouterLink to="/stations">
