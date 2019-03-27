@@ -22,7 +22,7 @@ const FavoritesContainer = (props) => {
               <Button color="secondary" onClick={props.setQuickStart.bind(null, favorite._id)}>Set Quick Start</Button>}
             </Col>
             <Col sm={4}>
-              <Button color="primary" outline onClick={props.setOpenFavorite.bind(null, i)}>
+              <Button color="primary" outline onClick={props.navToFavorite.bind(null, favorite)}>
               {favorite.destination ?
                 <strong>{favorite.origin} => {favorite.destination}</strong>
                 : <strong>{favorite.origin}</strong>

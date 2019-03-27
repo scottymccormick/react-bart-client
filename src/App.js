@@ -91,27 +91,27 @@ class App extends Component {
   toggleRegistrationModal = () => {
     this.setState({showRegistration: !this.state.showRegistration});
   }
-  toggleStations = () => {
-    this.setState({
-      showStations: !this.state.showStations,
-      showRoutePlanner: false,
-      showFavorites: false
-    });
-  }
-  toggleRoutePlanner = () => {
-    this.setState({
-      showRoutePlanner: !this.state.showRoutePlanner,
-      showStations: false,
-      showFavorites: false
-    });
-  }
-  toggleFavorites = () => {
-    this.setState({
-      showFavorites: !this.state.showFavorites,
-      showStations: false,
-      showRoutePlanner: false
-    });
-  }
+  // toggleStations = () => {
+  //   this.setState({
+  //     showStations: !this.state.showStations,
+  //     showRoutePlanner: false,
+  //     showFavorites: false
+  //   });
+  // }
+  // toggleRoutePlanner = () => {
+  //   this.setState({
+  //     showRoutePlanner: !this.state.showRoutePlanner,
+  //     showStations: false,
+  //     showFavorites: false
+  //   });
+  // }
+  // toggleFavorites = () => {
+  //   this.setState({
+  //     showFavorites: !this.state.showFavorites,
+  //     showStations: false,
+  //     showRoutePlanner: false
+  //   });
+  // }
   addFavorite = (origin, destination, e) => {
     const newFavorite = {
       email: this.state.email,
@@ -197,28 +197,28 @@ class App extends Component {
       this.props.history.push(`/stations/${quickStart.origin}`)
     }
   }
-  setOpenFavorite = async (favoriteIndex) => {
-    if (this.state.favorites[favoriteIndex].destination) {
-      await this.setState({
-        openFavorite: favoriteIndex,
-        showStations: false,
-        showRoutePlanner: true,
-        showFavorites: false
-      })
-    } else {
-      await this.setState({
-        openFavorite: favoriteIndex,
-        showStations: true,
-        showRoutePlanner: false,
-        showFavorites: false
-      })
-    }
-  }
-  endOpenFavorite = () => {
-    this.setState({
-      openFavorite: -1
-    });
-  }
+  // setOpenFavorite = async (favoriteIndex) => {
+  //   if (this.state.favorites[favoriteIndex].destination) {
+  //     await this.setState({
+  //       openFavorite: favoriteIndex,
+  //       showStations: false,
+  //       showRoutePlanner: true,
+  //       showFavorites: false
+  //     })
+  //   } else {
+  //     await this.setState({
+  //       openFavorite: favoriteIndex,
+  //       showStations: true,
+  //       showRoutePlanner: false,
+  //       showFavorites: false
+  //     })
+  //   }
+  // }
+  // endOpenFavorite = () => {
+  //   this.setState({
+  //     openFavorite: -1
+  //   });
+  // }
   componentDidMount() {
     this.loadStations()
   }
@@ -283,7 +283,6 @@ class App extends Component {
           <Route path="/stations" render={props => 
             <Stations {...props}
               stations={this.state.stations}
-              hideStations={this.toggleStations} 
               logged={this.state.logged} 
               email={this.state.email} 
               addFavorite={this.addFavorite} 
@@ -297,7 +296,6 @@ class App extends Component {
           <Route path="/routeplanner" render={props => 
             <RoutePlanner {...props}
               stations={this.state.stations}
-              hideRoutePlanner={this.toggleRoutePlanner} 
               logged={this.state.logged} 
               addFavorite={this.addFavorite} 
               deleteFavorite={this.deleteFavorite} 
@@ -307,8 +305,8 @@ class App extends Component {
               endOpenFavorite={this.endOpenFavorite}/>
             } 
           />
-          <Route exact path="/favorites" render={() => 
-            <Favorites 
+          <Route exact path="/favorites" render={props => 
+            <Favorites {...props}
               stations={this.state.stations}
               email={this.state.email} 
               favorites={this.state.favorites} 
@@ -316,9 +314,8 @@ class App extends Component {
               deleteFavorite={this.deleteFavorite} 
               quickStart={this.state.quickStart} 
               removeQuickStart={this.removeQuickStart} 
-              setQuickStart={this.setQuickStart} 
-              setOpenFavorite={this.setOpenFavorite} 
-              endOpenFavorite={this.endOpenFavorite}/>
+              setQuickStart={this.setQuickStart}
+              />
             } 
           />
 
