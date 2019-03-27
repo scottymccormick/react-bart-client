@@ -292,7 +292,7 @@ class App extends Component {
           <Route path="/routeplanner" render={props => 
             <RoutePlanner {...props}
               hideRoutePlanner={this.toggleRoutePlanner} 
-              ogged={this.state.logged} 
+              logged={this.state.logged} 
               addFavorite={this.addFavorite} 
               deleteFavorite={this.deleteFavorite} 
               favorites={this.state.favorites} 

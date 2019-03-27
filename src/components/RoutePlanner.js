@@ -17,10 +17,13 @@ class RoutePlanner extends Component {
       searched: false
     }
   }
-  handleInput = (e) => {
-    this.setState({
+  handleInput = async (e) => {
+    await this.setState({
       [e.currentTarget.name]: e.currentTarget.value
     });
+    if (this.state.origin && this.state.destination) {
+      this.handleSubmit()
+    }
   }
   handleSubmit = (e) => {
     if (e) e.preventDefault();
@@ -52,9 +55,12 @@ class RoutePlanner extends Component {
       searched: false
     });
   }
-  componentDidMount() {
-    this.setState({
-      searched: false
+  componentDidMount = async () => {
+    const query = queryParse(this.props.location.search)
+    await this.setState({
+      searched: false,
+      origin: query.origin,
+      destination: query.dest
     })
     axios.get(`${process.env.REACT_APP_API}/api/stations`)
       .then((response) => {
@@ -62,6 +68,9 @@ class RoutePlanner extends Component {
           this.setState({
             stations: response.data
           })
+          if (this.state.origin && this.state.destination) {
+            this.handleSubmit()
+          }
         }
       })
       .catch((err) => {
@@ -90,7 +99,6 @@ class RoutePlanner extends Component {
     }
   }
   render() {
-    console.log(queryParse(this.props.location.search))
     const favIndex = this.props.favorites.findIndex((fav) => {
       return fav.origin === this.state.origin && fav.destination === this.state.destination
     });
