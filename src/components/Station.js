@@ -13,7 +13,7 @@ class Station extends Component {
     }
   }
   getEtds = () => {
-    axios.get(`${process.env.REACT_APP_API}/api/stations/etd/${this.props.currentStation}`)
+    axios.get(`${process.env.REACT_APP_API}/api/stations/etd/${this.props.match.params.id}`)
       .then((response) => {
         if (response.status === 200) {
           this.setState({
@@ -28,7 +28,7 @@ class Station extends Component {
   }
   getFavIndex() {
     const favIndex = this.props.favorites.findIndex((fav) => {
-      return fav.origin === this.props.currentStation && !fav.destination
+      return fav.origin === this.props.match.params.id && !fav.destination
     });
     return favIndex;
   }
@@ -36,13 +36,24 @@ class Station extends Component {
     this.getEtds();
   }
   componentDidUpdate(prevProps) {
-    if (this.props.currentStation !== prevProps.currentStation) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getEtds();
     }
   }
   render() {
     return (
-      <StationPage currentStation={this.props.currentStation} goBack={this.props.goBack} etd={this.state.etd} stationName={this.state.name} logged={this.props.logged} email={this.props.email} addFavorite={this.props.addFavorite} deleteFavorite={this.props.deleteFavorite} favorites={this.props.favorites} favIndex={this.getFavIndex()} refresh={this.getEtds}/>
+      <StationPage 
+        currentStation={this.props.match.params.id} 
+        goBack={this.props.goBack} 
+        etd={this.state.etd} 
+        stationName={this.state.name} 
+        logged={this.props.logged} 
+        email={this.props.email} 
+        addFavorite={this.props.addFavorite} 
+        deleteFavorite={this.props.deleteFavorite} 
+        favorites={this.props.favorites} 
+        favIndex={this.getFavIndex()} 
+        refresh={this.getEtds}/>
     )
   }
 }

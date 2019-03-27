@@ -274,8 +274,8 @@ class App extends Component {
             </div>
           } />
 
-          <Route exact path="/stations" render={() => 
-            <Stations 
+          <Route path="/stations" render={(props) => 
+            <Stations {...props}
               hideStations={this.toggleStations} 
               logged={this.state.logged} 
               email={this.state.email} 
