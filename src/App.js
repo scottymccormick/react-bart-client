@@ -264,7 +264,7 @@ class App extends Component {
                   </RouterLink>
                 </Col>
                 <Col xs={6}>
-                  <RouterLink to="/stations">
+                  <RouterLink to="/routeplanner">
                     <Button size="lg" block color="light" className="home-button" >Route Planner</Button>
                   </RouterLink>
                 </Col>
@@ -284,7 +284,23 @@ class App extends Component {
               openQuickStart={this.state.openQuickStart} 
               endOpenQuickStart={this.endOpenQuickStart} 
               openFavorite={this.state.openFavorite} 
-              endOpenFavorite={this.endOpenFavorite} />} />
+              endOpenFavorite={this.endOpenFavorite} /> 
+            } 
+          />
+          <Route exact path="/routeplanner" render={() => 
+            <RoutePlanner 
+              hideRoutePlanner={this.toggleRoutePlanner} 
+              ogged={this.state.logged} 
+              addFavorite={this.addFavorite} 
+              deleteFavorite={this.deleteFavorite} 
+              favorites={this.state.favorites} 
+              quickStart={this.state.quickStart} 
+              openQuickStart={this.state.openQuickStart} 
+              endOpenQuickStart={this.endOpenQuickStart} 
+              openFavorite={this.state.openFavorite} 
+              endOpenFavorite={this.endOpenFavorite}/>
+            } 
+          />
           
 
           {/* New Layout ends here */}
