@@ -266,23 +266,23 @@ class App extends Component {
         <section className="my-5 p-3">
           <Route exact path="/" render={() => 
             <div>
-              <Row>
-                <Col xs={6}>
+              <Row className="justify-content-center">
+                <Col xs={6} md={4}>
                   <Button size="lg" block color="success" className="home-button" >Quick Start</Button>
                 </Col>
-                <Col xs={6}>
+                <Col xs={6} md={4}>
                   <RouterLink to="/favorites">
                     <Button size="lg" block color="info" className="home-button" >Favorites</Button>
                   </RouterLink>
                 </Col>
               </Row>
-              <Row>
-                <Col xs={6}>
+              <Row className="justify-content-center">
+                <Col xs={6} md={4}>
                   <RouterLink to="/stations">
                     <Button size="lg" block color="primary" className="home-button" >Stations</Button>
                   </RouterLink>
                 </Col>
-                <Col xs={6}>
+                <Col xs={6} md={4}>
                   <RouterLink to="/routeplanner">
                     <Button size="lg" block color="light" className="home-button" >Route Planner</Button>
                   </RouterLink>
