@@ -12,7 +12,7 @@ class RoutePlanner extends Component {
     this.state = {
       origin: '',
       destination: '',
-      stations: [],
+      // stations: [],
       routes: [],
       searched: false
     }
@@ -104,7 +104,12 @@ class RoutePlanner extends Component {
     });
     return (
       <div className="bg-light pb-3 my-2 mb-4">
-        <RouteForm handleSubmit={this.handleSubmit} handleInput={this.handleInput} formInfo={this.state} clearForm={this.clearForm}/>
+        <RouteForm 
+          handleSubmit={this.handleSubmit} 
+          handleInput={this.handleInput} 
+          formInfo={this.state}
+          stations={this.props.stations}
+          clearForm={this.clearForm}/>
         {
           this.props.logged && this.state.searched ? 
           <div>

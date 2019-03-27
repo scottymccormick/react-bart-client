@@ -29,6 +29,7 @@ class App extends Component {
       userId: '',
       user: {},
       quickStart: null,
+      stations: [],
       favorites: [],
       showLogin: false,
       showRegistration: false,
@@ -38,6 +39,19 @@ class App extends Component {
       openQuickStart: false,
       openFavorite: -1
     }
+  }
+  loadStations = () => {
+    axios.get(`${process.env.REACT_APP_API}/api/stations`)
+      .then((response) => {
+        if (response.status === 200) {
+          this.setState({
+            stations: response.data
+          })
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
   handleLogin = (user) => {
     this.setState({
@@ -218,6 +232,9 @@ class App extends Component {
       openFavorite: -1
     });
   }
+  componentDidMount() {
+    this.loadStations()
+  }
   render() {
     return (
       <div className="App h-100">
@@ -276,6 +293,7 @@ class App extends Component {
 
           <Route path="/stations" render={props => 
             <Stations {...props}
+              stations={this.state.stations}
               hideStations={this.toggleStations} 
               logged={this.state.logged} 
               email={this.state.email} 
@@ -291,6 +309,7 @@ class App extends Component {
           />
           <Route path="/routeplanner" render={props => 
             <RoutePlanner {...props}
+              stations={this.state.stations}
               hideRoutePlanner={this.toggleRoutePlanner} 
               logged={this.state.logged} 
               addFavorite={this.addFavorite} 
@@ -305,6 +324,7 @@ class App extends Component {
           />
           <Route exact path="/favorites" render={() => 
             <Favorites 
+              stations={this.state.stations}
               email={this.state.email} 
               favorites={this.state.favorites} 
               getFavorites={this.getFavorites} 

@@ -8,32 +8,32 @@ class Stations extends Component {
   constructor() {
     super();
 
-    this.state = {
-      stations: []
-    }
+    // this.state = {
+    //   stations: []
+    // }
   }
-  getStations() {
-    axios.get(`${process.env.REACT_APP_API}/api/stations`)
-      .then((response) => {
-        if (response.status === 200) {
-          this.setState({
-            stations: response.data
-          })
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
+  // getStations() {
+  //   axios.get(`${process.env.REACT_APP_API}/api/stations`)
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         this.setState({
+  //           stations: response.data
+  //         })
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }
   chooseStation = (e) => {
     const location = {
       pathname: `/stations/${e.currentTarget.value}`
     }
     this.props.history.push(location)
   }
-  componentDidMount() {
-    this.getStations();
-  }
+  // componentDidMount() {
+  //   this.getStations();
+  // }
   componentDidUpdate(prevProps) {
     // if (prevProps.openQuickStart !== this.props.openQuickStart && this.props.openQuickStart && !this.props.quickStart.destination && this.state.currentStation !== this.props.quickStart.origin) {
     //   this.setState({
@@ -59,7 +59,7 @@ class Stations extends Component {
           render={(props) =>
             <div>
               <StationPicker {...props}
-                stations={this.state.stations} 
+                stations={this.props.stations} 
                 selectStation={this.selectStation}
                 chooseStation={this.chooseStation} />
               <Station {...props}
@@ -75,7 +75,7 @@ class Stations extends Component {
           />
         <Route exact path={this.props.match.path} render={() => 
           <StationPicker 
-            stations={this.state.stations} 
+            stations={this.props.stations} 
             selectStation={this.selectStation}
             chooseStation={this.chooseStation} 
             />
