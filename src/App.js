@@ -7,6 +7,7 @@ import Stations from './components/Stations';
 import RoutePlanner from './components/RoutePlanner';
 import Favorites from './components/Favorites';
 import { Link as RouterLink, Route, withRouter } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import {  
   Collapse,
   Row,
@@ -226,11 +227,11 @@ class App extends Component {
     return (
       <div className="App h-100">
         <Navbar color="light" primary="true" expand="xs">
-          <RouterLink to="/">
-              {/* <NavbarBrand> */}
-              <strong>BART Track</strong>
-              {/* </NavbarBrand> */}
-          </RouterLink>
+          <LinkContainer to="/">
+            <NavbarBrand>
+                <strong>BART Track</strong>
+            </NavbarBrand>
+          </LinkContainer>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
