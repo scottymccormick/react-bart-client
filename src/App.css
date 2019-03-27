@@ -43,6 +43,8 @@
   height: 120px;
   margin: 10px 0;
   font-size: 1.5em;
+  max-width: 250px;
+  min-width: 150px;
 }
 
 .favorites-button {

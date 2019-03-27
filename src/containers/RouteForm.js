@@ -11,7 +11,7 @@ const RouteForm = (props) => {
               <Label>Origin:</Label>
               <select className="custom-select custom-select-md" name="origin" value={props.formInfo.origin} onChange={props.handleInput}>
                 <option key={-1} value="">Please choose a station</option>
-                {props.formInfo.stations.map((station, i) => {
+                {props.stations.map((station, i) => {
                   return <option key={i} value={station.abbr}>{station.name}</option>
                 })}
               </select>
@@ -22,7 +22,7 @@ const RouteForm = (props) => {
               <Label>Destination:</Label>
               <select className="custom-select custom-select-md" name="destination" value={props.formInfo.destination} onChange={props.handleInput}>
                 <option key={-1} value="">Please choose a station</option>
-                {props.formInfo.stations.map((station, i) => {
+                {props.stations.map((station, i) => {
                   return <option key={i} value={station.abbr}>{station.name}</option>
                 })}
               </select>

@@ -3,6 +3,7 @@ import RouteForm from '../containers/RouteForm';
 import axios from 'axios';
 import RouteResults from '../containers/RouteResults';
 import { Spinner, Button } from 'reactstrap';
+import { parse as queryParse } from 'query-string';
 
 class RoutePlanner extends Component {
   constructor() {
@@ -11,15 +12,17 @@ class RoutePlanner extends Component {
     this.state = {
       origin: '',
       destination: '',
-      stations: [],
       routes: [],
       searched: false
     }
   }
-  handleInput = (e) => {
-    this.setState({
+  handleInput = async (e) => {
+    await this.setState({
       [e.currentTarget.name]: e.currentTarget.value
     });
+    if (this.state.origin && this.state.destination) {
+      this.handleSubmit()
+    }
   }
   handleSubmit = (e) => {
     if (e) e.preventDefault();
@@ -51,21 +54,13 @@ class RoutePlanner extends Component {
       searched: false
     });
   }
-  componentDidMount() {
-    this.setState({
-      searched: false
+  componentDidMount = async () => {
+    const query = queryParse(this.props.location.search)
+    await this.setState({
+      searched: false,
+      origin: query.origin,
+      destination: query.dest
     })
-    axios.get(`${process.env.REACT_APP_API}/api/stations`)
-      .then((response) => {
-        if (response.status === 200) {
-          this.setState({
-            stations: response.data
-          })
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
   }
   componentDidUpdate = async (prevProps) => {
     if (prevProps.openQuickStart !== this.props.openQuickStart && this.props.openQuickStart && this.props.quickStart.destination ) {
@@ -94,7 +89,12 @@ class RoutePlanner extends Component {
     });
     return (
       <div className="bg-light pb-3 my-2 mb-4">
-        <RouteForm handleSubmit={this.handleSubmit} handleInput={this.handleInput} formInfo={this.state} clearForm={this.clearForm}/>
+        <RouteForm 
+          handleSubmit={this.handleSubmit} 
+          handleInput={this.handleInput} 
+          formInfo={this.state}
+          stations={this.props.stations}
+          clearForm={this.clearForm}/>
         {
           this.props.logged && this.state.searched ? 
           <div>
@@ -105,7 +105,16 @@ class RoutePlanner extends Component {
         }
         {this.state.searched ?
           (this.state.routes.length > 0 ? 
-          <RouteResults results={this.state.routes} origin={this.state.origin} destination={this.state.destination} addFavorite={this.props.addFavorite} logged={this.props.logged} favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} /> : <Spinner className="my-2" color="primary" />)
+          <RouteResults 
+            results={this.state.routes} 
+            origin={this.state.origin} 
+            destination={this.state.destination} 
+            addFavorite={this.props.addFavorite} 
+            logged={this.props.logged} 
+            favorites={this.props.favorites} 
+            deleteFavorite={this.props.deleteFavorite} /> : 
+          <Spinner className="my-2" color="primary" />)
+          // TODO have message for none found
           : null }
       </div>
     )
